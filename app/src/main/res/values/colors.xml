@@ -5,7 +5,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--    Ini warna BG ya cuy     -->
-    <color name="black">#FF000000</color>
     <color name="bgColor">#8D8D95</color>
     <color name="green100">#CCF0B6</color>
     <color name="green200">#B4E992</color>
