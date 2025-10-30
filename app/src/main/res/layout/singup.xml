@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="Daftar"
+        android:textSize="40dp"
+        android:paddingTop="60dp"
+        android:paddingLeft="20dp"
+        android:fontFamily="sans-serif-black"></TextView>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama Pengguna"
+        android:minHeight="48dp"
+        android:padding="20dp"
+        android:drawableEnd="@drawable/pengguna"
+        android:background="@drawable/border"
+        android:layout_marginBottom="20dp"></EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Alamat Email"
+        android:minHeight="48dp"
+        android:padding="20dp"
+        android:drawableEnd="@drawable/email"
+        android:background="@drawable/border"
+        android:layout_marginBottom="20dp"></EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kata Sandi"
+        android:minHeight="48dp"
+        android:padding="20dp"
+        android:drawableEnd="@drawable/sandisementara"
+        android:background="@drawable/border"
+        android:layout_marginBottom="20dp"></EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Konfirmasi Sandi"
+        android:minHeight="48dp"
+        android:padding="20dp"
+        android:drawableEnd="@drawable/sandisementara"
+        android:background="@drawable/border"
+        android:layout_marginBottom="20dp"></EditText>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:layout_gravity="right"
+        android:text="Lupa Kata Sandi?"></EditText>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:backgroundTint="#54BD10"
+        android:text="MASUK"></Button>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="14dp"
+        android:layout_gravity="center"
+        android:text="-----------------------------------------Atau-----------------------------------------">
+    </TextView>
+    <LinearLayout
+        android:id="@+id/btnGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/google_button_border"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_google_logo"
+            android:contentDescription="Google Logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masuk dengan Google"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingTop="10dp"
+        android:textSize="15dp"
+        android:text="apakah tidak punya akun? Daftar"
+</LinearLayout>
+
+

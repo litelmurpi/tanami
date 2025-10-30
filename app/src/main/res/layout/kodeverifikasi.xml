@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/back"></ImageView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="110dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Silahkan Periksa E-mail Anda"
+        android:textSize="25dp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kata sandi ini harus berbeda dari kata sandi sebelumnya."></TextView>
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/otp1"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:background="@drawable/otp_box"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+        <EditText
+            android:id="@+id/otp1"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:background="@drawable/otp_box"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+        <EditText
+            android:id="@+id/otp1"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:background="@drawable/otp_box"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+        <EditText
+            android:id="@+id/otp2"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:background="@drawable/otp_box"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+        <EditText
+            android:id="@+id/otp3"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:background="@drawable/otp_box"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+    </LinearLayout>
+ <TextView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:paddingTop="20dp"
+     android:textSize="16dp"
+     android:text="Kirim Ulang : 00.30"
+     android:gravity="center"
+     android:paddingBottom="360dp"></TextView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:backgroundTint="#54BD10"
+        android:text="Kirim Code"></Button>
+
+</LinearLayout>
+
