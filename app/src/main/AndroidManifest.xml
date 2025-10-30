@@ -12,7 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tanami">
         <activity
-            android:name=".TambahPerangkat"
+            android:name=".Resetpass"
+            android:exported="false" />
+        <activity
+            android:name=".Kodeverifikasi"
+            android:exported="false" />
+        <activity
+            android:name=".Lupasandi"
+            android:exported="false" />
+        <activity
+            android:name=".Singup"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
