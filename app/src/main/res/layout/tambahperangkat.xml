@@ -42,11 +42,11 @@
         android:id="@+id/icon_devices"
         android:layout_width="120dp"
         android:layout_height="117dp"
-        android:src="@drawable/Perangkat_terhubung_IOT"
+        android:src="@drawable/perangkat_terhubung_iot"
         app:layout_constraintTop_toTopOf="@id/icon_background_circle"
         app:layout_constraintBottom_toBottomOf="@id/icon_background_circle"
         app:layout_constraintStart_toStartOf="@id/icon_background_circle"
-        app:layout_constraintEnd_toEndOf="@id/icon_background_circle"/>
+        app:layout_constraintEnd_toEndOf="@id/icon_background_circle"></ImageView>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_container"

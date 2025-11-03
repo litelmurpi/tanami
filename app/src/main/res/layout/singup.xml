@@ -94,13 +94,14 @@
             android:layout_marginStart="10dp"
             android:textStyle="bold" />
     </LinearLayout>
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingTop="10dp"
-        android:textSize="15dp"
-        android:text="apakah tidak punya akun? Daftar"
+        android:textSize="15sp"
+        android:text="apakah tidak punya akun? Daftar" />
+
 </LinearLayout>
 
 
