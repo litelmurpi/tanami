@@ -9,7 +9,6 @@ import androidx.core.view.WindowInsetsCompat
 class TambahPerangkat : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.tambahperangkat)
     }
 }
