@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/neutral50">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbar4"
+        app:navigationIcon="@drawable/arrow_baack">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pusat Bantuan"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:fontFamily="@font/inter18ptbold" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <!-- Konten Scrollable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="16dp">
+
+            <!-- Judul "Butuh Bantuan?" -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Butuh Bantuan?"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter24ptsemibold"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Kartu "Butuh Bantuan?" -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="1dp"
+                app:cardUseCompatPadding="true"
+                android:backgroundTint="@android:color/white"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/teks_bantuan_1"
+                        android:textSize="15sp"
+                        android:textColor="@color/neutral"
+                        android:fontFamily="@font/inter18ptregular"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Judul "Layanan Bantuan:" -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Layanan Bantuan:"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter24ptsemibold"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Kartu "Layanan Bantuan:" -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="1dp"
+                app:cardUseCompatPadding="true"
+                android:backgroundTint="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Item 1: FAQ -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp"
+                        android:gravity="top">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="•"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_marginEnd="8dp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="FAQ (Pertanyaan yang Sering Ditanyakan)"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/inter18ptregular"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/teks_bantuan_faq"
+                                android:textSize="15sp"
+                                android:textColor="@color/neutral"
+                                android:fontFamily="@font/inter18ptregular"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Item 2: Lapor Masalah -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp"
+                        android:gravity="top">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="•"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_marginEnd="8dp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Lapor Masalah / Bug"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/inter18ptregular"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/teks_bantuan_bug"
+                                android:textSize="15sp"
+                                android:textColor="@color/neutral"
+                                android:fontFamily="@font/inter18ptregular"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Item 3: Pengaturan Akun -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp"
+                        android:gravity="top">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="•"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_marginEnd="8dp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pengaturan Akun &amp; Notifikasi"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/inter18ptregular"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/teks_bantuan_akun"
+                                android:textSize="15sp"
+                                android:textColor="@color/neutral"
+                                android:fontFamily="@font/inter18ptregular"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Item 4: Masalah Sensor -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="top">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="•"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_marginEnd="8dp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Masalah Sensor atau Data Kebun"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/inter18ptregular"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/teks_bantuan_sensor"
+                                android:textSize="15sp"
+                                android:textColor="@color/neutral"
+                                android:fontFamily="@font/inter18ptregular"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hubungi Kami"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/inter24ptsemibold"
+                android:layout_marginBottom="8dp"/>
+
+
+
+
+
+            <RelativeLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                tools:context=".MainActivity">
+
+                <TextView
+                    android:layout_width="350dp"
+                    android:layout_height="68dp"
+                    android:layout_centerInParent="true"
+                    android:text="tanami.support@gmail.com"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/inter18ptmedium"
+                    android:background="@drawable/back_edittext"
+                    android:elevation="4dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:drawableLeft="@drawable/mail"
+                    android:drawablePadding="16dp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                tools:context=".MainActivity">
+
+                <TextView
+                    android:layout_width="350dp"
+                    android:layout_height="68dp"
+                    android:layout_centerInParent="true"
+                    android:text="tanami.in"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/inter18ptmedium"
+                    android:background="@drawable/back_edittext"
+                    android:elevation="4dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:drawableLeft="@drawable/instagram"
+                    android:drawablePadding="16dp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                tools:context=".MainActivity">
+
+                <TextView
+                    android:layout_width="350dp"
+                    android:layout_height="68dp"
+                    android:layout_centerInParent="true"
+                    android:text="tanami.in"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/inter18ptmedium"
+                    android:background="@drawable/back_edittext"
+                    android:elevation="4dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:drawableLeft="@drawable/twitter"
+                    android:drawablePadding="16dp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                tools:context=".MainActivity">
+
+                <TextView
+                    android:layout_width="350dp"
+                    android:layout_height="68dp"
+                    android:layout_centerInParent="true"
+                    android:text="tanami.in"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/inter18ptmedium"
+                    android:background="@drawable/back_edittext"
+                    android:elevation="4dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:drawableLeft="@drawable/facebook"
+                    android:drawablePadding="16dp" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Tanami</string>
+    <string name="teks_tentang">Tanami adalah aplikasi pintar yang dirancang untuk membantu masyarakat mengelola kebun di pekarangan rumah secara efisien dan otomatis.
+        Tanami dilengkapi sensor untuk penyiraman dan pemupukan otomatis,
+        serta fitur monitoring real-time seperti kondisi tanah dan cuaca.</string>
+    <string name="teks_tentang1">Mewujudkan kemandirian pangan masyarakat melalui optimalisasi lahan pekarangan rumah.
+        Tanami hadir sebagai solusi cerdas untuk menciptakan kebun sehat,
+        efisien, dan terpantau secara digital.</string>
+    <string name="teks_tentang2">Pantau kelembapan dan kesuburan tanah secara real-time melalui sensor.</string>
+    <string name="teks_tentang3">Kebun disiram dan dipupuk otomatis tanpa harus repot.</string>
+    <string name="teks_tentang4">Deteksi penyakit tanaman cukup dari foto,
+        langsung dapatkan solusi dan penanganannya.</string>
+    <string name="teks_tentang5">Asisten pribadi kebunmu:
+        pengingat pupuk, masa panen, dan info tanaman yang kamu tanam.</string>
+    <string name="teks_tentang6"> Artikel seputar tips cara menanam.</string>
+    <string name="privasitentang_teks">Orang lain dapat melihat nama
+        profil \nkamu di komunitas Tanami.</string>
+    <string name="privasitentang_teks2">Menyembunyikan aktivitas seperti komentar,
+        posting, atau likes dari profil publik.</string>
+    <string name="privasitentang_teks3">Hubungkan dan bagikan aktivitas tanam
+        (panen, tips, posting) ke media sosial kamu.</string>
+    <string name="privasitentang_teks4">Tampilkan sensor kelembapan atau kesuburan yang sedang
+        aktif ke publik (khusus fitur kolaboratif).</string>
+    <string name="teks_bantuan_1">Kami siap membantu kapan pun kamu memerlukan bantuan.
+        Tim dukungan Tanami hadir untuk menjawab pertanyaan, menangani kendala teknis,
+        atau menerima saran demi meningkatkan pengalaman berkebun digitalmu.</string>
+    <string name="teks_bantuan_faq">Temukan jawaban cepat terkait penggunaan aplikasi Tanami</string>
+    <string name="teks_bantuan_bug">Laporkan jika ada error, crash, atau fitur tidak berfungsi.</string>
+    <string name="teks_bantuan_akun">Bantuan untuk edit profil, ubah kata sandi, atau pengaturan reminder.</string>
+    <string name="teks_bantuan_sensor">Bantuan jika data kelembapan, kesuburan, atau cuaca tidak muncul atau error.</string>
+
+
 </resources>

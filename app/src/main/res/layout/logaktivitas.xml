@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/neutral50">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar2"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/arrow_baack">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log Aktivitas"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:fontFamily="@font/inter18ptbold" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <TextView
+
+        android:layout_width="350dp"
+        android:layout_height="68dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:text="13 Juli 2025"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/back_edittext"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/inter18ptmedium"
+        android:textColor="@color/black" />
+    <TextView
+
+        android:layout_width="350dp"
+        android:layout_height="68dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:text="12 Juli 2025"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/back_edittext"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/inter18ptmedium"
+        android:textColor="@color/black" />
+    <TextView
+
+        android:layout_width="350dp"
+        android:layout_height="68dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:text="11 Juli 2025"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/back_edittext"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/inter18ptmedium"
+        android:textColor="@color/black" />
+    <TextView
+
+        android:layout_width="350dp"
+        android:layout_height="68dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:text="10 Juli 2025"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/back_edittext"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/inter18ptmedium"
+        android:textColor="@color/black" />
+
+
+</LinearLayout>
