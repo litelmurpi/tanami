@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/neutral50">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbar5"
+        app:navigationIcon="@drawable/icon_back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profil"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:fontFamily="@font/inter18_ptbold" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <!-- CARD 1 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="29dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="1dp"
+                app:cardUseCompatPadding="true"
+                android:backgroundTint="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/imageView_logo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:src="@drawable/logo_tanami"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="12dp"
+                        android:adjustViewBounds="true" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/teks_tentang"
+                        android:paddingTop="10dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/neutral1000"
+                        android:fontFamily="@font/inter18_ptregular"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+            <!-- CARD 2 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="1dp"
+                app:cardUseCompatPadding="true"
+                android:backgroundTint="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Misi Kami"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter24_ptsemibold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/teks_tentang1"
+                        android:paddingTop="10dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/neutral1000"
+                        android:fontFamily="@font/inter18_ptregular"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+            <!-- CARD 3 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="1dp"
+                app:cardUseCompatPadding="true"
+                android:backgroundTint="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Apa yang membuat Tanami berbeda?"
+                        android:textSize="24sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter24_ptsemibold"
+                        android:layout_marginBottom="16dp"/>
+
+
+
+                    <!-- Item 1 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Smart Monitoring System"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter18_ptregular"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/teks_tentang2"
+                        android:textSize="15sp"
+                        android:textColor="@color/neutral1000"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/inter18_ptregular"/>
+
+
+                    <!-- Item 2 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Auto-Irrigation &amp; Fertilizing"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter18_ptregular"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/teks_tentang3"
+                        android:textSize="15sp"
+                        android:textColor="@color/neutral1000"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/inter18_ptregular"/>
+
+
+                    <!-- Item 3 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• TanamCare"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter18_ptregular"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/teks_tentang4"
+                        android:textSize="15sp"
+                        android:textColor="@color/neutral1000"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/inter18_ptregular"/>
+
+
+                    <!-- Item 4 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• TanamAssisten"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter18_ptregular"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/teks_tentang5"
+                        android:textSize="15sp"
+                        android:textColor="@color/neutral1000"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/inter18_ptregular"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:text="Tanami v1.0.0 (Juli 2025)"
+                android:textColor="@color/neutral200"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
