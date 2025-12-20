@@ -9,41 +9,45 @@
     <ImageView
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/back"></ImageView>
+        android:src="@drawable/icon_back"></ImageView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="110dp"
+        android:paddingBottom="6dp"
         android:fontFamily="sans-serif-black"
         android:text="Buat Kata Sandi Baru"
-        android:textSize="25dp"></TextView>
+        android:textSize="30dp"></TextView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/neutral400"
+        android:textSize="15sp"
         android:text="Kata sandi ini harus berbeda dari kata sandi sebelumnya."
-        android:paddingBottom="10dp"></TextView>
+        android:paddingBottom="12dp"></TextView>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/icon_sandi_sementara"
+        android:background="@drawable/border"
         android:hint="Kata Sandi Baru"
         android:minHeight="48dp"
         android:padding="20dp"
-        android:drawableEnd="@drawable/sandisementara"
-        android:background="@drawable/border"
         android:layout_marginBottom="20dp"></EditText>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="350dp"
         android:background="@drawable/border"
-        android:drawableEnd="@drawable/sandisementara"
+        android:drawableEnd="@drawable/icon_sandi_sementara"
         android:hint="Konfirmasi Kata Sandi Baru"
         android:minHeight="48dp"
-        android:padding="20dp"></EditText>
+        android:padding="20dp"
+        android:layout_marginBottom="300dp"></EditText>
     <Button
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:backgroundTint="#54BD10"
-        android:text="Kirim Code"></Button>
+        android:textSize="17dp"
+        android:text="Atur ulang kata sandi"></Button>
 </LinearLayout>

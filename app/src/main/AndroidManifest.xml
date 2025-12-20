@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,23 +13,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.App.Starting"  tools:targetApi="33">
+        android:theme="@style/Theme.App.Starting"
+        tools:targetApi="33">
 
         <activity
-            android:name=".Resetpass"
-            android:exported="false" />
-        <activity
-            android:name=".Kodeverifikasi"
-            android:exported="false" />
-        <activity
-            android:name=".Lupasandi"
-            android:exported="false" />
-        <activity
-            android:name=".Singup"
-            android:exported="false" />
-        <activity
-            android:name=".Login"
-            android:exported="true" >
+            android:name=".ActivitySplash"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,10 +26,53 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".DetailTanaman"
+            android:exported="false" />
+        <activity
+            android:name=".ListPanduan"
+            android:exported="false" />
+        <activity
+            android:name=".PrivasiAkses"
+            android:exported="false" />
+        <activity
+            android:name=".Bantuan"
+            android:exported="false" />
+        <activity
+            android:name=".EditAkun"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".Tentang"
+            android:exported="false" />
+        <activity
+            android:name=".LogAktivitas"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPass"
+            android:exported="false" />
+        <activity
+            android:name=".SingUp"
+            android:exported="false" />
+        <activity
+            android:name=".KodeVerifikasi"
+            android:exported="false" />
+        <activity
+            android:name=".LupaSandi"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".TambahPerangkat"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

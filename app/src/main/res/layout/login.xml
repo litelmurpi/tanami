@@ -4,22 +4,11 @@
     android:orientation="vertical"
     android:padding="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Welcome To"
-        android:fontFamily="sans-serif-black"
-        android:textSize="30dp"
-        android:layout_gravity="center">
-    </TextView>
     <ImageView
-        android:layout_width="400dp"
-        android:layout_height="240dp"
+        android:layout_width="314dp"
+        android:layout_height="162dp"
         android:layout_gravity="center"
-        android:src="@drawable/logo1rmbg">
-    </ImageView>
+        android:src="@drawable/logo_tanami"></ImageView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +16,7 @@
         android:layout_gravity="center"
         android:textAlignment="center"
         android:fontFamily="sans-serif-black"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="100dp"
         android:textSize="15dp">
     </TextView>
     <EditText
@@ -36,7 +25,7 @@
         android:hint="Alamat Email"
         android:minHeight="48dp"
         android:padding="20dp"
-        android:drawableEnd="@drawable/email"
+        android:drawableEnd="@drawable/icon_email"
         android:background="@drawable/border"
         android:layout_marginBottom="20dp"></EditText>
     <EditText
@@ -45,46 +34,70 @@
         android:hint="Kata Sandi"
         android:minHeight="48dp"
         android:padding="20dp"
-        android:drawableEnd="@drawable/sandisementara"
+        android:drawableEnd="@drawable/icon_sandi_sementara"
         android:background="@drawable/border"
-        android:layout_marginBottom="20dp"></EditText>
+        android:layout_marginBottom="7dp"></EditText>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12dp"
         android:layout_gravity="right"
-        android:text="Lupa Kata Sandi?"></TextView>
+        android:paddingBottom="35dp"
+        android:text="Lupa Kata Sandi?"
+        android:textColor="@color/neutral400"
+        android:textSize="12dp">
+    </TextView>
     <Button
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="65dp"
         android:backgroundTint="#54BD10"
-        android:text="MASUK"></Button>
+        android:layout_marginBottom="10dp"
+        android:textSize="17dp"
+        android:text="MASUK">
+    </Button>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textSize="14dp"
         android:layout_gravity="center"
+        android:textColor="@color/neutral300"
         android:text="----------------------------------------Atau----------------------------------------">
     </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="apakah tidak punya akun? "/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:text="Daftar"/>
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/btnGoogle"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="65dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@drawable/google_button_border"
+        android:background="@drawable/border_btn_google"
         android:paddingHorizontal="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="3dp"
         android:clickable="true"
         android:focusable="true">
-
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_google_logo"
+            android:src="@drawable/icon_google"
             android:contentDescription="Google Logo" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,12 +107,4 @@
             android:layout_marginStart="10dp"
             android:textStyle="bold" />
     </LinearLayout>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingTop="10dp"
-        android:textSize="15dp"
-        android:text="apakah tidak punya akun? Daftar"/>
-
 </LinearLayout>

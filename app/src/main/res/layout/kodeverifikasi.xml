@@ -8,18 +8,22 @@
     <ImageView
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/back"></ImageView>
+        android:src="@drawable/icon_back">
+    </ImageView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="110dp"
         android:fontFamily="sans-serif-black"
         android:text="Silahkan Periksa E-mail Anda"
-        android:textSize="25dp"></TextView>
+        android:textSize="25dp"
+        android:layout_marginBottom="5dp"></TextView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kata sandi ini harus berbeda dari kata sandi sebelumnya."></TextView>
+        android:text="Kami sudah mengirimkkan kode verifikasi ke alamat email yang terhubung dengan akun Anda."
+        android:textColor="@color/neutral300">
+    </TextView>
 
     <LinearLayout
         android:layout_width="350dp"
@@ -27,28 +31,6 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginTop="20dp">
-
-        <EditText
-            android:id="@+id/otp1"
-            android:layout_width="60dp"
-            android:layout_height="70dp"
-            android:gravity="center"
-            android:inputType="number"
-            android:maxLength="1"
-            android:background="@drawable/otp_box"
-            android:textSize="20sp"
-            android:layout_margin="5dp" />
-
-        <EditText
-            android:id="@+id/otp1"
-            android:layout_width="60dp"
-            android:layout_height="70dp"
-            android:gravity="center"
-            android:inputType="number"
-            android:maxLength="1"
-            android:background="@drawable/otp_box"
-            android:textSize="20sp"
-            android:layout_margin="5dp" />
 
         <EditText
             android:id="@+id/otp1"
@@ -83,6 +65,28 @@
             android:textSize="20sp"
             android:layout_margin="5dp" />
 
+        <EditText
+            android:id="@+id/otp4"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:background="@drawable/otp_box"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+        <EditText
+            android:id="@+id/otp5"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:background="@drawable/otp_box"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
     </LinearLayout>
  <TextView
      android:layout_width="match_parent"
@@ -91,12 +95,15 @@
      android:textSize="16dp"
      android:text="Kirim Ulang : 00.30"
      android:gravity="center"
-     android:paddingBottom="360dp"></TextView>
+     android:textColor="@color/neutral300"
+     android:textStyle="bold"
+     android:paddingBottom="330dp"></TextView>
     <Button
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:backgroundTint="#54BD10"
-        android:text="Kirim Code"></Button>
+        android:textSize="20dp"
+        android:text="Verifikasi"></Button>
 
 </LinearLayout>
 
