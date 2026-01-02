@@ -8,27 +8,27 @@
     android:background="#F5F5F5"
     tools:context=".Dashboard">
 
-    <!-- Main Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:animateLayoutChanges="true">
 
-            <!-- Header -->
             <LinearLayout
+                android:id="@+id/layoutHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-                <!-- Logo -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -39,26 +39,26 @@
                     android:textColor="#4CAF50"
                     android:fontFamily="sans-serif-medium" />
 
-                <!-- Avatar -->
                 <ImageView
                     android:id="@+id/imgAvatar"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/icon_profile"
                     android:background="@drawable/bg_circle"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="Profile" />
-
+                    android:scaleType="centerCrop" />
             </LinearLayout>
 
-            <!-- Greeting Card -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardGreeting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
-                app:strokeWidth="0dp">
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:layout_constraintTop_toBottomOf="@id/layoutHeader"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -71,9 +71,8 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/ic_launcher_background"
-                        android:background="@drawable/bg_circle_green"
-                        android:padding="12dp"
-                        android:contentDescription="Plant Icon" />
+                        android:background="@drawable/bg_circle"
+                        android:padding="12dp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -97,84 +96,106 @@
                             android:textSize="14sp"
                             android:textColor="#757575"
                             android:layout_marginTop="4dp" />
-
                     </LinearLayout>
-
                 </LinearLayout>
-
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- com.example.tanami.Device Selector -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardDeviceSelector"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                app:cardCornerRadius="12dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="12dp"
+                app:cardCornerRadius="50dp"
                 app:cardElevation="2dp"
-                app:strokeWidth="0dp">
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:layout_constraintTop_toBottomOf="@id/cardGreeting"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cardAddButton">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="16dp"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
                     android:gravity="center_vertical">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
                         <TextView
                             android:id="@+id/textDeviceName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Selada Hidroponik"
+                            android:text="Pilih Kebun"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#212121"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/textDeviceId"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="#A005"
-                            android:textSize="14sp"
+                            android:text=" - #..."
+                            android:textSize="16sp"
                             android:textColor="#9E9E9E"
-                            android:layout_marginTop="2dp" />
-
+                            android:layout_marginStart="4dp"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
                     </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/iconArrow"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/icon_dropdown"
-                        android:contentDescription="Dropdown" />
-
-                    <ImageView
-                        android:id="@+id/btnAddDevice"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/icon_add"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:layout_marginStart="8dp"
-                        android:contentDescription="Add Device" />
-
+                        app:tint="#212121"/>
                 </LinearLayout>
-
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Monitoring Cards Grid -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAddButton"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:layout_constraintTop_toBottomOf="@id/cardGreeting"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/cardDeviceSelector">
+
+                <ImageView
+                    android:id="@+id/btnAddDevice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_add"
+                    android:padding="14dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:tint="#000000"/>
+            </com.google.android.material.card.MaterialCardView>
+
             <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/monitoringGrid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="16dp"
+                android:paddingBottom=""
                 app:columnCount="2"
-                app:rowCount="2">
+                app:rowCount="2"
+                app:layout_constraintTop_toBottomOf="@id/cardDeviceSelector"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <!-- Kelembaban Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="180dp"
@@ -183,16 +204,14 @@
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp"
                     app:strokeWidth="0dp"
+                    app:cardBackgroundColor="#FFFFFF"
                     app:layout_columnWeight="1">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:padding="20dp"
                         android:gravity="center">
-
-                        <!-- Progress Circle -->
                         <com.google.android.material.progressindicator.CircularProgressIndicator
                             android:id="@+id/progressKelembaban"
                             android:layout_width="120dp"
@@ -201,32 +220,25 @@
                             app:indicatorColor="#2196F3"
                             app:trackColor="#E3F2FD"
                             app:trackThickness="12dp"
-                            app:indicatorSize="120dp" />
-
+                            app:indicatorSize="120dp"/>
                         <TextView
                             android:id="@+id/textKelembaban"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="75%"
+                            android:text="0%"
                             android:textSize="32sp"
                             android:textStyle="bold"
                             android:textColor="#212121"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="-80dp" />
-
+                            android:layout_marginTop="-80dp"/>
                         <TextView
+                            android:text="Kelembaban"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Kelembaban"
-                            android:textSize="14sp"
                             android:textColor="#757575"
-                            android:layout_marginTop="45dp" />
-
+                            android:layout_marginTop="45dp"/>
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- pH Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="180dp"
@@ -235,15 +247,14 @@
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp"
                     app:strokeWidth="0dp"
+                    app:cardBackgroundColor="#FFFFFF"
                     app:layout_columnWeight="1">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:padding="20dp"
                         android:gravity="center">
-
                         <com.google.android.material.progressindicator.CircularProgressIndicator
                             android:id="@+id/progressPH"
                             android:layout_width="120dp"
@@ -252,41 +263,25 @@
                             app:indicatorColor="#4CAF50"
                             app:trackColor="#E8F5E9"
                             app:trackThickness="12dp"
-                            app:indicatorSize="120dp" />
-
+                            app:indicatorSize="120dp"/>
                         <TextView
                             android:id="@+id/textPH"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="6,8"
+                            android:text="0.0"
                             android:textSize="32sp"
                             android:textStyle="bold"
                             android:textColor="#212121"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="-80dp" />
-
+                            android:layout_marginTop="-80dp"/>
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="pH"
-                            android:textSize="10sp"
-                            android:textColor="#9E9E9E"
-                            android:layout_marginStart="55dp"
-                            android:layout_marginTop="-25dp" />
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Kesuburan"
-                            android:textSize="14sp"
                             android:textColor="#757575"
-                            android:layout_marginTop="20dp" />
-
+                            android:layout_marginTop="-25dp"/>
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Temperature Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="180dp"
@@ -294,14 +289,15 @@
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp"
                     app:strokeWidth="0dp"
+                    app:cardBackgroundColor="#FFFFFF"
                     app:layout_columnWeight="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="20dp"
-                        android:gravity="center">
+                        android:padding="20dp">
 
                         <com.google.android.material.progressindicator.CircularProgressIndicator
                             android:id="@+id/progressTemp"
@@ -309,43 +305,29 @@
                             android:layout_height="120dp"
                             android:progress="45"
                             app:indicatorColor="#FFC107"
+                            app:indicatorSize="120dp"
                             app:trackColor="#FFF9E6"
-                            app:trackThickness="12dp"
-                            app:indicatorSize="120dp" />
+                            app:trackThickness="12dp" />
 
                         <TextView
                             android:id="@+id/textTemp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="22.3"
-                            android:textSize="32sp"
-                            android:textStyle="bold"
+                            android:layout_marginTop="-80dp"
+                            android:text="0.0"
                             android:textColor="#212121"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="-80dp" />
+                            android:textSize="32sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="°C"
-                            android:textSize="10sp"
-                            android:textColor="#9E9E9E"
-                            android:layout_marginStart="70dp"
-                            android:layout_marginTop="-25dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-25dp"
                             android:text="Temperatur"
-                            android:textSize="14sp"
-                            android:textColor="#757575"
-                            android:layout_marginTop="20dp" />
-
+                            android:textColor="#757575" />
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Watering Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="180dp"
@@ -353,113 +335,135 @@
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp"
                     app:strokeWidth="0dp"
+                    app:cardBackgroundColor="#FFFFFF"
                     app:layout_columnWeight="1">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:padding="20dp"
                         android:gravity="center">
-
                         <ImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:src="@drawable/ic_launcher_background"
-                            android:contentDescription="Watering Icon"
-                            android:layout_marginBottom="16dp" />
-
+                            android:layout_marginBottom="16dp"/>
                         <TextView
+                            android:text="Siram\nManual"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Siram\nManual"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="#212121"
                             android:gravity="center"
-                            android:layout_marginBottom="16dp" />
-
-                        <!-- Toggle Switch -->
+                            android:layout_marginBottom="16dp"/>
                         <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/switchWatering"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:thumb="@drawable/switch_thumb"
-                            android:track="@drawable/switch_track"
-                            android:checked="false" />
-
+                            android:checked="false"/>
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
 
             </androidx.gridlayout.widget.GridLayout>
 
-            <!-- Last Update -->
-            <TextView
-                android:id="@+id/textLastUpdate"
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDropdownContainer"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="terakhir diperbarui: 19-07-2025 00:01 WIB"
-                android:textSize="12sp"
-                android:textColor="#9E9E9E"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                app:layout_constraintTop_toBottomOf="@id/cardDeviceSelector"
+                app:layout_constraintStart_toStartOf="@id/cardDeviceSelector"
+                app:layout_constraintEnd_toEndOf="@id/cardAddButton">
 
-            <!-- Bottom Buttons -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDropdownList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:clipToPadding="false"
+                    android:paddingVertical="8dp"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
             <LinearLayout
+                android:id="@+id/layoutFooter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/monitoringGrid"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPanduan"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:text="Panduan"
-                    android:textSize="16sp"
-                    android:textColor="#212121"
-                    app:icon="@drawable/ic_launcher_background"
-                    app:iconGravity="textStart"
-                    app:iconTint="#212121"
-                    app:cornerRadius="12dp"
-                    app:strokeColor="#E0E0E0"
-                    app:strokeWidth="1dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                <TextView
+                    android:id="@+id/textLastUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="terakhir diperbarui: -"
+                    android:textSize="12sp"
+                    android:textColor="#9E9E9E"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnTanamCare"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:text="TanamCare"
-                    android:textSize="16sp"
-                    android:textColor="#212121"
-                    app:icon="@drawable/ic_launcher_background"
-                    app:iconGravity="textEnd"
-                    app:iconTint="#212121"
-                    app:cornerRadius="12dp"
-                    app:strokeColor="#E0E0E0"
-                    app:strokeWidth="1dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPanduan"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="Panduan"
+                        android:textSize="16sp"
+                        android:textColor="#212121"
+                        app:icon="@drawable/ic_launcher_background"
+                        app:iconGravity="textStart"
+                        app:iconTint="#212121"
+                        app:backgroundTint="#FFFFFF"
+                        app:cornerRadius="12dp"
+                        app:strokeColor="#E0E0E0"
+                        app:strokeWidth="1dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTanamCare"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="TanamCare"
+                        android:textSize="16sp"
+                        android:textColor="#212121"
+                        app:icon="@drawable/ic_launcher_background"
+                        app:iconGravity="textEnd"
+                        app:iconTint="#212121"
+                        app:backgroundTint="#FFFFFF"
+                        app:cornerRadius="12dp"
+                        app:strokeColor="#E0E0E0"
+                        app:strokeWidth="1dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanami v1.0.0 (Juli 2025)"
+                    android:textSize="12sp"
+                    android:textColor="#BDBDBD"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp" />
             </LinearLayout>
 
-            <!-- Version -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tanami v1.0.0 (Juli 2025)"
-                android:textSize="12sp"
-                android:textColor="#BDBDBD"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp" />
-
-        </LinearLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

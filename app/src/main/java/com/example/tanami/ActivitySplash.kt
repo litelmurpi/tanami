@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.VideoView
 
 class ActivitySplash : Activity() {
@@ -21,7 +22,7 @@ class ActivitySplash : Activity() {
         videoView.start()
 
         videoView.setOnCompletionListener {
-            val intent = Intent(this, Login::class.java)
+            val intent = Intent(this, Dashboard::class.java)
             startActivity(intent)
             finish()
         }
