@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bumptech.glide.Glide
 import com.example.tanami.models.DetailData
 import com.example.tanami.models.TanamanDetailResponse
@@ -42,6 +43,7 @@ class DetailTanaman : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detailtanaman)
+        val splashScreen = installSplashScreen()
 
         tanamanId = intent.getIntExtra("TANAMAN_ID", 0)
         val tanamanNama = intent.getStringExtra("TANAMAN_NAMA")
