@@ -18,25 +18,27 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Image Tanaman (Optional - untuk item dengan gambar) -->
+        <!-- Image Tanaman dari API -->
         <ImageView
             android:id="@+id/imageTanaman"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
             android:contentDescription="Gambar Tanaman"
-            android:visibility="gone"
+            android:background="#E0E0E0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_plant"
-            tools:visibility="visible" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:src="@drawable/ic_plant" />
 
         <!-- Container Text -->
         <LinearLayout
+            android:id="@+id/textContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="12dp"
+            app:layout_constraintStart_toEndOf="@id/imageTanaman"
             app:layout_constraintEnd_toStartOf="@id/iconArrow"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
