@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/neutral50">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/icon_back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profil"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:fontFamily="@font/inter18_ptbold" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="150dp"
+        app:cardElevation="0dp"
+        android:layout_marginTop="28dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/icon_profile">
+        </ImageView>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
+        android:text="Profil"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:fontFamily="@font/inter24_ptsemibold">
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="@font/inter18_ptitalic"
+        android:text="\@nama"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray">
+
+    </TextView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:strokeWidth="0dp"
+        app:strokeColor="@android:color/transparent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:id="@+id/editakun"
+                app:navigationIcon="@drawable/icon_edit_akun"
+                app:menu="@menu/edits_akun">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Akun"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:id="@+id/textEditAkun"
+                    android:fontFamily="@font/inter18_ptmedium">
+                </TextView>
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:id="@+id/aktivitas"
+                app:navigationIcon="@drawable/icon_clocks_arrow"
+                app:menu="@menu/edits_akun">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Log Aktivitas"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:id="@+id/textAktivitas"
+                    android:fontFamily="@font/inter18_ptmedium">
+                </TextView>
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <View
+                android:layout_width="250dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/icon_privacy"
+                android:id="@+id/privakses"
+                app:menu="@menu/edits_akun">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Privasi &amp; Akses"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:id="@+id/textPrivAkses"
+                    android:fontFamily="@font/inter18_ptmedium">
+                </TextView>
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/icon_help"
+                android:id="@+id/pusatbantuan"
+                app:menu="@menu/edits_akun">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pusaat Bantuan"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:id="@+id/textPusatbantuan"
+                    android:fontFamily="@font/inter18_ptmedium">
+                </TextView>
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/icon_info"
+                android:id="@+id/tentang"
+                app:menu="@menu/edits_akun">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tentang"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:id="@+id/textTentang"
+                    android:fontFamily="@font/inter18_ptmedium">
+                </TextView>
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <View
+                android:layout_width="250dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_gravity="center_horizontal" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/icon_exit">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Keluar"
+                    android:textColor="@color/txtKluar"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/inter18_ptmedium">
+                </TextView>
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text="Tanami v1.0.0 (Juli 2025)"
+        android:textColor="@color/neutral200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</LinearLayout>

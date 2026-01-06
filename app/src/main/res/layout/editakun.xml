@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/neutral50">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/icon_back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Akun"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:fontFamily="@font/inter18_ptbold" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="150dp"
+        app:cardElevation="0dp"
+        android:layout_marginTop="28dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/icon_profile">
+        </ImageView>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
+        android:text="Profil"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:fontFamily="@font/inter24_ptsemibold">
+    </TextView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:cardCornerRadius="20dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:strokeWidth="0dp"
+        app:strokeColor="@android:color/transparent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter18_ptmedium"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukan Nama Anda"
+                    android:inputType="text"
+                    android:background="@drawable/bg_edittext2"
+                    android:padding="14dp"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Pengguna"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter18_ptmedium"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="\@Nama"
+                    android:inputType="text"
+                    android:background="@drawable/bg_edittext2"
+                    android:padding="14dp"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat Email"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter18_ptmedium"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nama\@gmail.com"
+                    android:inputType="text"
+                    android:background="@drawable/bg_edittext2"
+                    android:padding="14dp"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kata Sandi"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter18_ptmedium"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Kata Sandi Anda"
+                    android:inputType="text"
+                    android:background="@drawable/bg_edittext2"
+                    android:padding="14dp"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="250dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_gravity="center_horizontal"
+                />
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="105dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="end"
+                android:backgroundTint="@color/green"
+                android:text="Simpan" />
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Tanami v1.0.0 (Juli 2025)"
+        android:textColor="@color/neutral200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</LinearLayout>

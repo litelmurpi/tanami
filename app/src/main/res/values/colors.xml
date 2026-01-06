@@ -3,13 +3,24 @@
     <!--    Ini warna umum ya TIM  -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#54BD10</color>
+    <color name="gray">#E5E5EA</color>
 
     <!--    Ini warna BG ya cuy     -->
     <color name="bgColor">#8D8D95</color>
     <color name="green100">#CCF0B6</color>
     <color name="green200">#B4E992</color>
 
+    <!--    Ini warna Button ya cuy     -->
+    <color name="switch_track_off">#E0E0E0</color>
+    <color name="switch_track_on">#54BD1B</color>
+    <color name="switch_track_shadow_on">#3D8E15</color>
+    <color name="switch_track_shadow_off">#B0B0B0</color>
+    <color name="switch_thumb_color">#FFFFFF</color>
+
+
     <!--    Ini warna Text ya cuy      -->
+    <color name="neutral50">#F1F1F2</color>
     <color name="neutral1000">#161618</color>
     <color name="neutral200">#BEBEC2</color>
     <color name="neutral300">#A0A0A6</color>
@@ -17,5 +28,5 @@
     <color name="neutral900">#2F2F33</color>
     <color name="txtKluar">#FF383C</color>
 
-
 </resources>
+

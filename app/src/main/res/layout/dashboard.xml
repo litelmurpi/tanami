@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".Dashboard">
+
+    <!-- Main Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="20dp">
+
+                <!-- Logo -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tanami"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#4CAF50"
+                    android:fontFamily="sans-serif-medium" />
+
+                <!-- Avatar -->
+                <ImageView
+                    android:id="@+id/imgAvatar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icon_profile"
+                    android:background="@drawable/bg_circle"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Profile" />
+
+            </LinearLayout>
+
+            <!-- Greeting Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_launcher_background"
+                        android:background="@drawable/bg_circle_green"
+                        android:padding="12dp"
+                        android:contentDescription="Plant Icon" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hai, Tanamin!"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gimana perkembangan kebun kamu saat ini ?"
+                            android:textSize="14sp"
+                            android:textColor="#757575"
+                            android:layout_marginTop="4dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- com.example.tanami.Device Selector -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDeviceSelector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textDeviceName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Selada Hidroponik"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121" />
+
+                        <TextView
+                            android:id="@+id/textDeviceId"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#A005"
+                            android:textSize="14sp"
+                            android:textColor="#9E9E9E"
+                            android:layout_marginTop="2dp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/icon_dropdown"
+                        android:contentDescription="Dropdown" />
+
+                    <ImageView
+                        android:id="@+id/btnAddDevice"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/icon_add"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_marginStart="8dp"
+                        android:contentDescription="Add Device" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Monitoring Cards Grid -->
+            <androidx.gridlayout.widget.GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:columnCount="2"
+                app:rowCount="2">
+
+                <!-- Kelembaban Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp"
+                    app:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center">
+
+                        <!-- Progress Circle -->
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:id="@+id/progressKelembaban"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:progress="75"
+                            app:indicatorColor="#2196F3"
+                            app:trackColor="#E3F2FD"
+                            app:trackThickness="12dp"
+                            app:indicatorSize="120dp" />
+
+                        <TextView
+                            android:id="@+id/textKelembaban"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="75%"
+                            android:textSize="32sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-80dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kelembaban"
+                            android:textSize="14sp"
+                            android:textColor="#757575"
+                            android:layout_marginTop="45dp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- pH Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp"
+                    app:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center">
+
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:id="@+id/progressPH"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:progress="68"
+                            app:indicatorColor="#4CAF50"
+                            app:trackColor="#E8F5E9"
+                            app:trackThickness="12dp"
+                            app:indicatorSize="120dp" />
+
+                        <TextView
+                            android:id="@+id/textPH"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="6,8"
+                            android:textSize="32sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-80dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="pH"
+                            android:textSize="10sp"
+                            android:textColor="#9E9E9E"
+                            android:layout_marginStart="55dp"
+                            android:layout_marginTop="-25dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kesuburan"
+                            android:textSize="14sp"
+                            android:textColor="#757575"
+                            android:layout_marginTop="20dp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Temperature Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp"
+                    app:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center">
+
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:id="@+id/progressTemp"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:progress="45"
+                            app:indicatorColor="#FFC107"
+                            app:trackColor="#FFF9E6"
+                            app:trackThickness="12dp"
+                            app:indicatorSize="120dp" />
+
+                        <TextView
+                            android:id="@+id/textTemp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="22.3"
+                            android:textSize="32sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-80dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="°C"
+                            android:textSize="10sp"
+                            android:textColor="#9E9E9E"
+                            android:layout_marginStart="70dp"
+                            android:layout_marginTop="-25dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Temperatur"
+                            android:textSize="14sp"
+                            android:textColor="#757575"
+                            android:layout_marginTop="20dp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Watering Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp"
+                    app:layout_columnWeight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_launcher_background"
+                            android:contentDescription="Watering Icon"
+                            android:layout_marginBottom="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Siram\nManual"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121"
+                            android:gravity="center"
+                            android:layout_marginBottom="16dp" />
+
+                        <!-- Toggle Switch -->
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/switchWatering"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:thumb="@drawable/switch_thumb"
+                            android:track="@drawable/switch_track"
+                            android:checked="false" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.gridlayout.widget.GridLayout>
+
+            <!-- Last Update -->
+            <TextView
+                android:id="@+id/textLastUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="terakhir diperbarui: 19-07-2025 00:01 WIB"
+                android:textSize="12sp"
+                android:textColor="#9E9E9E"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Bottom Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPanduan"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Panduan"
+                    android:textSize="16sp"
+                    android:textColor="#212121"
+                    app:icon="@drawable/ic_launcher_background"
+                    app:iconGravity="textStart"
+                    app:iconTint="#212121"
+                    app:cornerRadius="12dp"
+                    app:strokeColor="#E0E0E0"
+                    app:strokeWidth="1dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTanamCare"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="TanamCare"
+                    android:textSize="16sp"
+                    android:textColor="#212121"
+                    app:icon="@drawable/ic_launcher_background"
+                    app:iconGravity="textEnd"
+                    app:iconTint="#212121"
+                    app:cornerRadius="12dp"
+                    app:strokeColor="#E0E0E0"
+                    app:strokeWidth="1dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            </LinearLayout>
+
+            <!-- Version -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanami v1.0.0 (Juli 2025)"
+                android:textSize="12sp"
+                android:textColor="#BDBDBD"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
