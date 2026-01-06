@@ -7,9 +7,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
+        android:id="@+id/btn_back_reset"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/icon_back"></ImageView>
+        android:src="@drawable/icon_back"
+        android:clickable="true"
+        android:focusable="true"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,37 +21,46 @@
         android:paddingBottom="6dp"
         android:fontFamily="sans-serif-black"
         android:text="Buat Kata Sandi Baru"
-        android:textSize="30dp"></TextView>
+        android:textSize="30sp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/neutral400"
         android:textSize="15sp"
         android:text="Kata sandi ini harus berbeda dari kata sandi sebelumnya."
-        android:paddingBottom="12dp"></TextView>
+        android:paddingBottom="12dp"/>
+
     <EditText
+        android:id="@+id/et_password_baru"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableEnd="@drawable/icon_sandi_sementara"
         android:background="@drawable/border"
         android:hint="Kata Sandi Baru"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="20dp"
-        android:layout_marginBottom="20dp"></EditText>
+        android:layout_marginBottom="20dp"/>
 
     <EditText
+        android:id="@+id/et_konfirmasi_password_baru"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
         android:drawableEnd="@drawable/icon_sandi_sementara"
         android:hint="Konfirmasi Kata Sandi Baru"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="20dp"
-        android:layout_marginBottom="300dp"></EditText>
+        android:layout_marginBottom="300dp"/>
+
     <Button
+        android:id="@+id/btn_reset_password"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:backgroundTint="#54BD10"
-        android:textSize="17dp"
-        android:text="Atur ulang kata sandi"></Button>
+        android:textSize="17sp"
+        android:text="Atur ulang kata sandi"/>
+
 </LinearLayout>

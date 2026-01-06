@@ -4,6 +4,8 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,17 +23,18 @@ import com.example.tanami.utils.TanamiPrefs
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
-// Model Data
+// Model Data untuk Dropdown
 data class DeviceItem(val name: String, val id: String, val isActive: Boolean)
 
 class Dashboard : AppCompatActivity() {
 
-    // Views
+    // --- VIEWS ---
     private lateinit var imgAvatar: ImageView
     private lateinit var cardDeviceSelector: MaterialCardView
     private lateinit var textDeviceName: TextView
@@ -41,7 +44,7 @@ class Dashboard : AppCompatActivity() {
     private lateinit var cardDropdownContainer: MaterialCardView
     private lateinit var rvDropdownList: RecyclerView
 
-    // Monitoring
+    // --- MONITORING VIEWS ---
     private lateinit var progressKelembaban: CircularProgressIndicator
     private lateinit var textKelembaban: TextView
     private lateinit var progressPH: CircularProgressIndicator
@@ -53,15 +56,27 @@ class Dashboard : AppCompatActivity() {
     private lateinit var btnPanduan: MaterialButton
     private lateinit var btnTanamCare: MaterialButton
 
+    // --- VARIABEL UTAMA ---
     private lateinit var prefs: TanamiPrefs
     private var currentDeviceIp: String? = null
     private var isDropdownOpen = false
 
+    // --- HANDLER UNTUK DATA REAL-TIME (LOOPING) ---
+    private val handler = Handler(Looper.getMainLooper())
+    private val fetchRunnable = object : Runnable {
+        override fun run() {
+            fetchRealtimeData() // Ambil data dari ESP32
+            handler.postDelayed(this, 2000) // Ulangi setiap 2 detik
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-
         val splashScreen = installSplashScreen()
-
         super.onCreate(savedInstanceState)
+
+        // Force Light Mode agar tampilan konsisten
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO)
+
         setContentView(R.layout.dashboard)
 
         prefs = TanamiPrefs(this)
@@ -74,6 +89,12 @@ class Dashboard : AppCompatActivity() {
         super.onResume()
         refreshDashboardState()
         if (isDropdownOpen) closeDropdown()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // PENTING: Matikan pengambilan data saat aplikasi diminimize agar hemat baterai
+        handler.removeCallbacks(fetchRunnable)
     }
 
     private fun initViews() {
@@ -101,12 +122,18 @@ class Dashboard : AppCompatActivity() {
         val savedName = prefs.getDeviceName()
         val savedIp = prefs.getDeviceIp()
 
+        // Hapus antrian lama agar tidak double loop
+        handler.removeCallbacks(fetchRunnable)
+
         if (savedIp != null) {
             textDeviceName.text = savedName
             textDeviceId.text = "IP: $savedIp"
             currentDeviceIp = savedIp
             switchWatering.isEnabled = true
-            simulateSensorData()
+
+            // MULAI LOOPING PENGAMBILAN DATA REAL-TIME
+            handler.post(fetchRunnable)
+
         } else {
             textDeviceName.text = "Pilih Kebun"
             textDeviceId.text = "Belum terhubung"
@@ -115,6 +142,48 @@ class Dashboard : AppCompatActivity() {
             switchWatering.isChecked = false
             updateMonitoringUI(0, 0.0, 0.0)
         }
+    }
+
+    // --- FUNGSI BARU: AMBIL DATA REAL DARI ESP32 ---
+    private fun fetchRealtimeData() {
+        if (currentDeviceIp == null) return
+
+        Thread {
+            try {
+                // 1. Panggil URL ESP32
+                val url = URL("http://$currentDeviceIp/status")
+                val conn = url.openConnection() as HttpURLConnection
+                conn.requestMethod = "GET"
+                conn.connectTimeout = 1500 // Timeout cepat (1.5 detik)
+
+                if (conn.responseCode == 200) {
+                    val stream = conn.inputStream
+                    // Baca respon string
+                    val response = Scanner(stream).useDelimiter("\\A").next()
+
+                    // 2. Parsing JSON {"moisture": 45, "pump": "OFF", "mode": "AUTO"}
+                    val json = JSONObject(response)
+                    val moisture = json.optInt("moisture", 0)
+                    val temp = json.optDouble("temperature", 0.0)
+
+                    // (Opsional) Ambil status pompa jika ingin sinkronisasi switch
+                    // val pumpStatus = json.optString("pump")
+
+                    // 3. Update UI di Main Thread
+                    runOnUiThread {
+                        // Masukkan data asli ke UI
+                        // Karena hardware ESP32 belum ada sensor PH & Suhu, kita set 0 atau dummy dulu
+                        // Fokus ke Moisture (Sensor Tanah)
+                        updateMonitoringUI(moisture, 0.0, temp)
+                        updateLastUpdate() // Update jam
+                    }
+                }
+                conn.disconnect()
+            } catch (e: Exception) {
+                // Jangan crash kalau gagal konek (misal alat mati), diam saja atau log
+                e.printStackTrace()
+            }
+        }.start()
     }
 
     private fun setupListeners() {
@@ -128,8 +197,13 @@ class Dashboard : AppCompatActivity() {
             }
             if (switchWatering.isPressed) sendCommandToEsp32(isChecked)
         }
+
         btnPanduan.setOnClickListener { startActivity(Intent(this, ListPanduan::class.java)) }
-        btnTanamCare.setOnClickListener { Toast.makeText(this, "Fitur AI Segera Hadir!", Toast.LENGTH_SHORT).show() }
+
+        // --- MODIFIKASI UTAMA DISINI: LINK KE HALAMAN SCAN AI ---
+        btnTanamCare.setOnClickListener {
+            startActivity(Intent(this, TanamCare::class.java))
+        }
     }
 
     private fun toggleDropdown() {
@@ -162,8 +236,7 @@ class Dashboard : AppCompatActivity() {
             }
         } else {
             // Data Dummy jika kosong
-            dropdownItems.add(DeviceItem("Pakcoy Balkon", "192.168.1.50", false))
-            dropdownItems.add(DeviceItem("Kebun Atas", "192.168.1.51", false))
+            dropdownItems.add(DeviceItem("Tanami Device 1", "0.0.0.0", false))
         }
 
         val currentName = prefs.getDeviceName()
@@ -181,7 +254,6 @@ class Dashboard : AppCompatActivity() {
                 showRenameDialog(itemToEdit)
             },
             onDelete = { itemToDelete ->
-                // CALLBACK DELETE (BARU)
                 showDeleteConfirmation(itemToDelete)
             }
         )
@@ -219,22 +291,16 @@ class Dashboard : AppCompatActivity() {
             .show()
     }
 
-    // --- MODUL HAPUS BARU ---
     private fun showDeleteConfirmation(item: DeviceItem) {
         AlertDialog.Builder(this)
             .setTitle("Hapus Perangkat?")
             .setMessage("Apakah Anda yakin ingin menghapus '${item.name}'? Data tidak bisa dikembalikan.")
             .setPositiveButton("Hapus") { _, _ ->
-                // Panggil fungsi remove di Prefs
                 prefs.removeDevice(item.id)
-
-                // Refresh semua tampilan
                 setupDropdownList()
                 refreshDashboardState()
-
                 Toast.makeText(this, "${item.name} dihapus.", Toast.LENGTH_SHORT).show()
 
-                // Jika list jadi kosong, tutup dropdown otomatis
                 if (prefs.getDeviceHistory().isEmpty()) {
                     closeDropdown()
                 }
@@ -243,7 +309,6 @@ class Dashboard : AppCompatActivity() {
             .show()
     }
 
-    // ... (Logika IoT & Sensor tetap sama) ...
     private fun sendCommandToEsp32(isOn: Boolean) {
         val state = if (isOn) "ON" else "OFF"
         val targetUrl = "http://$currentDeviceIp/control?pompa=$state"
@@ -271,35 +336,36 @@ class Dashboard : AppCompatActivity() {
             }
         }.start()
     }
-    private fun simulateSensorData() {
-        val h = (70..80).random()
-        val p = (6.5 + Math.random()).coerceAtMost(7.5)
-        val t = (24.0 + Math.random() * 2).coerceAtMost(28.0)
-        updateMonitoringUI(h, p, t)
-    }
+
     private fun updateMonitoringUI(humidity: Int, ph: Double, temperature: Double) {
+        // Update Kelembaban (Data Asli)
         progressKelembaban.progress = humidity
         textKelembaban.text = "$humidity%"
+
+        // Update PH (Data Dummy / 0)
         val phProgress = ((ph / 14.0) * 100).toInt()
         progressPH.progress = phProgress
         textPH.text = String.format("%.1f", ph)
+
+        // Update Suhu (Data Dummy / 0)
         val tempProgress = ((temperature / 50.0) * 100).toInt()
         progressTemp.progress = tempProgress
         textTemp.text = String.format("%.1f", temperature)
     }
+
     private fun updateLastUpdate() {
         val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale("id", "ID"))
         textLastUpdate.text = "terakhir diperbarui: ${sdf.format(Date())} WIB"
     }
 }
 
-// --- ADAPTER UPDATE (3 FUNGSI: CLICK, EDIT, DELETE) ---
+// --- ADAPTER TIDAK PERLU DIUBAH ---
 class DashboardDropdownAdapter(
     private val list: List<DeviceItem>,
     private val currentActiveName: String?,
     private val onClick: (DeviceItem) -> Unit,
     private val onEdit: (DeviceItem) -> Unit,
-    private val onDelete: (DeviceItem) -> Unit // <--- Callback Hapus
+    private val onDelete: (DeviceItem) -> Unit
 ) : RecyclerView.Adapter<DashboardDropdownAdapter.Holder>() {
 
     class Holder(v: View) : RecyclerView.ViewHolder(v) {
@@ -309,7 +375,7 @@ class DashboardDropdownAdapter(
         val indicator: View = v.findViewById(R.id.indicator_selected)
         val dot: ImageView = v.findViewById(R.id.img_status_dot)
         val btnEdit: ImageView = v.findViewById(R.id.btn_edit)
-        val btnDelete: ImageView = v.findViewById(R.id.btn_delete) // Bind tombol sampah
+        val btnDelete: ImageView = v.findViewById(R.id.btn_delete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -341,8 +407,6 @@ class DashboardDropdownAdapter(
 
         holder.itemView.setOnClickListener { onClick(item) }
         holder.btnEdit.setOnClickListener { onEdit(item) }
-
-        // LOGIKA KLIK SAMPAH
         holder.btnDelete.setOnClickListener { onDelete(item) }
     }
 

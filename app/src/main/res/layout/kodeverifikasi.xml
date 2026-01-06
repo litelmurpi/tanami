@@ -5,25 +5,30 @@
     android:orientation="vertical"
     android:padding="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <ImageView
+        android:id="@+id/btn_back_verifikasi"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/icon_back">
-    </ImageView>
+        android:src="@drawable/icon_back"
+        android:clickable="true"
+        android:focusable="true"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="110dp"
         android:fontFamily="sans-serif-black"
         android:text="Silahkan Periksa E-mail Anda"
-        android:textSize="25dp"
-        android:layout_marginBottom="5dp"></TextView>
+        android:textSize="25sp"
+        android:layout_marginBottom="5dp"/>
+
     <TextView
+        android:id="@+id/tv_email_verifikasi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kami sudah mengirimkkan kode verifikasi ke alamat email yang terhubung dengan akun Anda."
-        android:textColor="@color/neutral300">
-    </TextView>
+        android:textColor="@color/neutral300"/>
 
     <LinearLayout
         android:layout_width="350dp"
@@ -41,7 +46,7 @@
             android:maxLength="1"
             android:background="@drawable/otp_box"
             android:textSize="20sp"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"/>
 
         <EditText
             android:id="@+id/otp2"
@@ -52,7 +57,7 @@
             android:maxLength="1"
             android:background="@drawable/otp_box"
             android:textSize="20sp"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"/>
 
         <EditText
             android:id="@+id/otp3"
@@ -63,7 +68,7 @@
             android:maxLength="1"
             android:background="@drawable/otp_box"
             android:textSize="20sp"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"/>
 
         <EditText
             android:id="@+id/otp4"
@@ -74,7 +79,7 @@
             android:maxLength="1"
             android:background="@drawable/otp_box"
             android:textSize="20sp"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"/>
 
         <EditText
             android:id="@+id/otp5"
@@ -85,25 +90,28 @@
             android:maxLength="1"
             android:background="@drawable/otp_box"
             android:textSize="20sp"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"/>
 
     </LinearLayout>
- <TextView
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:paddingTop="20dp"
-     android:textSize="16dp"
-     android:text="Kirim Ulang : 00.30"
-     android:gravity="center"
-     android:textColor="@color/neutral300"
-     android:textStyle="bold"
-     android:paddingBottom="330dp"></TextView>
+
+    <TextView
+        android:id="@+id/tv_countdown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:textSize="16sp"
+        android:text="Kirim Ulang : 00:30"
+        android:gravity="center"
+        android:textColor="@color/neutral300"
+        android:textStyle="bold"
+        android:paddingBottom="330dp"/>
+
     <Button
+        android:id="@+id/btn_verifikasi"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:backgroundTint="#54BD10"
-        android:textSize="20dp"
-        android:text="Verifikasi"></Button>
+        android:textSize="20sp"
+        android:text="Verifikasi"/>
 
 </LinearLayout>
-
