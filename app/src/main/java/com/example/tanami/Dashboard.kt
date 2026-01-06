@@ -13,6 +13,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.example.tanami.utils.LogManager
+import com.example.tanami.utils.LogModel
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
@@ -189,13 +191,43 @@ class Dashboard : AppCompatActivity() {
     private fun setupListeners() {
         btnAddDevice.setOnClickListener { startActivity(Intent(this, TambahPerangkat::class.java)) }
         cardDeviceSelector.setOnClickListener { toggleDropdown() }
-        switchWatering.setOnCheckedChangeListener { _, isChecked ->
+        imgAvatar.setOnClickListener {
+            // Pindah ke halaman Profile
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
+        }
+        // Di dalam function setupListeners()
+        switchWatering.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            // 1. Cek dulu apakah sudah terhubung ke alat
             if (currentDeviceIp == null) {
                 Toast.makeText(this, "Pilih kebun dulu!", Toast.LENGTH_SHORT).show()
-                switchWatering.isChecked = false
+                buttonView.isChecked = false // Matikan switch lagi
                 return@setOnCheckedChangeListener
             }
-            if (switchWatering.isPressed) sendCommandToEsp32(isChecked)
+
+            // 2. Pastikan ini ditekan oleh MANUSIA (bukan otomatis berubah oleh kode)
+            if (buttonView.isPressed) {
+
+                // --- LOGIKA SIMPAN LOG (TAMBAHKAN INI) ---
+                if (isChecked) {
+                    val logManager = LogManager(this) // Panggil asisten pencatat
+
+                    // Ambil Jam & Tanggal Sekarang
+                    val jam = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+                    val tanggal = SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID")).format(Date())
+
+                    // Tulis ke Buku Catatan (Log)
+                    logManager.simpanLog(LogModel("Penyiraman Manual", jam, tanggal, "MANUAL"))
+
+                    // Info ke user
+                    Toast.makeText(this, "Menyiram... (Tercatat di Log)", Toast.LENGTH_SHORT).show()
+                }
+                // ------------------------------------------
+
+                // 3. Kirim perintah asli ke Alat ESP32
+                sendCommandToEsp32(isChecked)
+            }
         }
 
         btnPanduan.setOnClickListener { startActivity(Intent(this, ListPanduan::class.java)) }
