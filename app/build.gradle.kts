@@ -33,6 +33,8 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures { viewBinding = true }
 }
 
 dependencies {
@@ -43,6 +45,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.bluetooth)
+    implementation(libs.generativeai)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -65,4 +68,25 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation ("androidx.activity:activity-ktx:1.8.2")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
+    // CameraX core library using the camera2 implementation
+    val cameraxVersion = "1.3.0-rc01"
+    implementation("androidx.camera:camera-core:$cameraxVersion")
+    implementation("androidx.camera:camera-camera2:$cameraxVersion")
+    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
+    implementation("androidx.camera:camera-view:$cameraxVersion")
+    // --- AI GOOGLE GEMINI (VERSI 0.9.0 YANG PALING STABIL) ---
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
+
+    // --- PENDUKUNG AI (COROUTINES) ---
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+
+    // --- TESTING (Opsional) ---
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    implementation ("androidx.core:core-splashscreen:1.0.1")
 }

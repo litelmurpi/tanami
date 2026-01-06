@@ -4,77 +4,90 @@
     android:orientation="vertical"
     android:padding="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:text="Daftar"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:paddingTop="20dp"
         android:paddingLeft="20dp"
-        android:fontFamily="sans-serif-black">
-    </TextView>
+        android:fontFamily="sans-serif-black"/>
+
+    <!-- NAMA PENGGUNA -->
     <EditText
+        android:id="@+id/et_nama_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nama Pengguna"
+        android:inputType="textPersonName"
         android:minHeight="48dp"
         android:padding="20dp"
         android:drawableEnd="@drawable/icon_pengguna"
         android:background="@drawable/border"
-        android:layout_marginBottom="20dp">
-    </EditText>
+        android:layout_marginBottom="20dp"/>
+
+    <!-- EMAIL -->
     <EditText
+        android:id="@+id/et_email_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Alamat Email"
+        android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="20dp"
         android:drawableEnd="@drawable/icon_email"
         android:background="@drawable/border"
-        android:layout_marginBottom="20dp">
-    </EditText>
+        android:layout_marginBottom="20dp"/>
+
+    <!-- PASSWORD -->
     <EditText
+        android:id="@+id/et_password_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Kata Sandi"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="20dp"
         android:drawableEnd="@drawable/icon_sandi_sementara"
         android:background="@drawable/border"
-        android:layout_marginBottom="20dp">
-    </EditText>
+        android:layout_marginBottom="20dp"/>
+
+    <!-- KONFIRMASI PASSWORD -->
     <EditText
+        android:id="@+id/et_password_confirmation_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Konfirmasi Sandi"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="20dp"
         android:drawableEnd="@drawable/icon_sandi_sementara"
         android:background="@drawable/border"
-        android:layout_marginBottom="20dp">
-    </EditText>
+        android:layout_marginBottom="20dp"/>
 
+    <!-- BUTTON DAFTAR -->
     <Button
+        android:id="@+id/btn_signup"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:backgroundTint="#54BD10"
         android:text="Daftar"
-        android:layout_marginTop="50dp">
-    </Button>
+        android:layout_marginTop="50dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:layout_gravity="center"
         android:textColor="@color/neutral300"
-        android:text="----------------------------------------Atau----------------------------------------">
-    </TextView>
+        android:text="----------------------------------------Atau----------------------------------------"/>
 
+    <!-- BUTTON GOOGLE -->
     <LinearLayout
-        android:id="@+id/btnGoogle"
+        android:id="@+id/btn_google_signup"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
@@ -88,8 +101,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/icon_google"
-            android:contentDescription="Google Logo" />
-
+            android:contentDescription="Google Logo"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,9 +109,10 @@
             android:textColor="#333333"
             android:textSize="16sp"
             android:layout_marginStart="10dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
     </LinearLayout>
 
+    <!-- LINK KE LOGIN -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -108,16 +121,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:text="sudah punya akun? "/>
         <TextView
+            android:id="@+id/tv_go_to_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:text="Masuk"/>
+            android:textColor="#54BD10"
+            android:text="Masuk"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 
 </LinearLayout>
-
-

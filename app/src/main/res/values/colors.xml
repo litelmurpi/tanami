@@ -11,6 +11,7 @@
     <color name="green100">#CCF0B6</color>
     <color name="green200">#B4E992</color>
     <color name="neutral_bg">#F5F5F5</color>
+    <color name="neutral_100">#E5E5E6</color>
 
 
     <!--    Ini warna Button ya cuy     -->
@@ -19,6 +20,10 @@
     <color name="switch_track_shadow_on">#3D8E15</color>
     <color name="switch_track_shadow_off">#B0B0B0</color>
     <color name="switch_thumb_color">#FFFFFF</color>
+
+    <color name="switch_track_off_sm">#FFFFFF</color>
+    <color name="switch_track_shadow_off_sm">#B0B0B0</color>
+    <color name="switch_thumb_color_sm">#FF000000</color>
 
 
     <!--    Ini warna Text ya cuy      -->
@@ -29,6 +34,7 @@
     <color name="neutral400">#8D8D95</color>
     <color name="neutral900">#2F2F33</color>
     <color name="txtKluar">#FF383C</color>
+    <color name="txtsapaan">#275708</color>
 
 </resources>
 

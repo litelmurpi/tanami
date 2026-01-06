@@ -4,86 +4,107 @@
     android:orientation="vertical"
     android:padding="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <ImageView
         android:layout_width="314dp"
         android:layout_height="162dp"
         android:layout_gravity="center"
-        android:src="@drawable/logo_tanami"></ImageView>
+        android:src="@drawable/logo_tanami"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="“Menanam Tumbuhan,  Menyiram Harapan, menumbuhkan Masa Depan.”"
+        android:text="Menanam Tumbuhan,  Menyiram Harapan, menumbuhkan Masa Depan."
         android:layout_gravity="center"
         android:textAlignment="center"
         android:fontFamily="sans-serif-black"
         android:layout_marginBottom="100dp"
-        android:textSize="15dp">
-    </TextView>
+        android:textSize="15sp"/>
+
+    <!-- EMAIL INPUT -->
     <EditText
+        android:id="@+id/et_email_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Alamat Email"
+        android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="20dp"
         android:drawableEnd="@drawable/icon_email"
         android:background="@drawable/border"
-        android:layout_marginBottom="20dp"></EditText>
+        android:layout_marginBottom="20dp"/>
+
+    <!-- PASSWORD INPUT -->
     <EditText
+        android:id="@+id/et_password_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Kata Sandi"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="20dp"
         android:drawableEnd="@drawable/icon_sandi_sementara"
         android:background="@drawable/border"
-        android:layout_marginBottom="7dp"></EditText>
+        android:layout_marginBottom="7dp"/>
+
+    <!-- FORGOT PASSWORD -->
     <TextView
+        android:id="@+id/tv_forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:paddingBottom="35dp"
         android:text="Lupa Kata Sandi?"
         android:textColor="@color/neutral400"
-        android:textSize="12dp">
-    </TextView>
+        android:textSize="12sp"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <!-- BUTTON MASUK -->
     <Button
+        android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:backgroundTint="#54BD10"
         android:layout_marginBottom="10dp"
-        android:textSize="17dp"
-        android:text="MASUK">
-    </Button>
+        android:textSize="17sp"
+        android:text="MASUK"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:layout_gravity="center"
         android:textColor="@color/neutral300"
-        android:text="----------------------------------------Atau----------------------------------------">
-    </TextView>
+        android:text="----------------------------------------Atau----------------------------------------"/>
 
+    <!-- LINK KE SIGNUP -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:orientation="horizontal"
         android:gravity="center">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:text="apakah tidak punya akun? "/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        android:text="Daftar"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="apakah tidak punya akun? "/>
+        <TextView
+            android:id="@+id/tv_go_to_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#54BD10"
+            android:text="Daftar"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 
+    <!-- BUTTON GOOGLE -->
     <LinearLayout
-        android:id="@+id/btnGoogle"
+        android:id="@+id/btn_google_login"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:orientation="horizontal"
@@ -97,7 +118,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/icon_google"
-            android:contentDescription="Google Logo" />
+            android:contentDescription="Google Logo"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,6 +126,6 @@
             android:textColor="#333333"
             android:textSize="16sp"
             android:layout_marginStart="10dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
     </LinearLayout>
 </LinearLayout>
