@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:src="@drawable/ic_plant" />
+            tools:src="@drawable/icon_plant" />
 
         <!-- Container Text -->
         <LinearLayout

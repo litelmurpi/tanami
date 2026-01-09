@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/neutral50">
 
     <ImageView
         android:id="@+id/btn_back_lupa_sandi"
@@ -50,9 +51,9 @@
     <Button
         android:id="@+id/btn_kirim_code"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:backgroundTint="#54BD10"
         android:text="Kirim Code"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
 </LinearLayout>
