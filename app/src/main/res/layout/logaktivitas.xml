@@ -5,99 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/neutral50">
+    android:background="#F5F5F5"> <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:paddingHorizontal="16dp"
+    android:background="#F5F5F5">
 
-    <com.google.android.material.appbar.MaterialToolbar
+    <ImageView
+        android:id="@+id/btnBackLog"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/icon_back"
+        android:layout_centerVertical="true"
+        app:tint="#212121"/> <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Log Aktivitas"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    android:textColor="#212121"
+    android:layout_centerInParent="true"/>
+</RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:id="@+id/toolbar2"
-        android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@drawable/icon_back">
+        android:layout_height="match_parent"
+        android:padding="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/containerLog"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log Aktivitas"
-            android:layout_gravity="center"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:paddingBottom="50dp"/>
 
-    </com.google.android.material.appbar.MaterialToolbar>
-
-
-    <TextView
-        android:layout_width="350dp"
-        android:layout_height="68dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
-        android:text="13 Juli 2025"
-        android:gravity="center_vertical"
-        android:layout_gravity="center"
-        android:background="@drawable/bg_edittext"
-        android:elevation="4dp"
-        android:padding="16dp"
-        android:layout_marginTop="20dp"
-        android:textSize="15sp"
-        android:fontFamily="@font/inter18_ptmedium"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:layout_width="350dp"
-        android:layout_height="68dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
-        android:text="12 Juli 2025"
-        android:gravity="center_vertical"
-        android:layout_gravity="center"
-        android:background="@drawable/bg_edittext"
-        android:elevation="4dp"
-        android:padding="16dp"
-        android:layout_marginTop="15dp"
-        android:textSize="15sp"
-        android:fontFamily="@font/inter18_ptmedium"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:layout_width="350dp"
-        android:layout_height="68dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
-        android:text="11 Juli 2025"
-        android:gravity="center_vertical"
-        android:layout_gravity="center"
-        android:background="@drawable/bg_edittext"
-        android:elevation="4dp"
-        android:padding="16dp"
-        android:layout_marginTop="15dp"
-        android:textSize="15sp"
-        android:fontFamily="@font/inter18_ptmedium"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:layout_width="350dp"
-        android:layout_height="68dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
-        android:text="10 Juli 2025"
-        android:gravity="center_vertical"
-        android:layout_gravity="center"
-        android:background="@drawable/bg_edittext"
-        android:elevation="4dp"
-        android:padding="16dp"
-        android:layout_marginTop="15dp"
-        android:textSize="15sp"
-        android:fontFamily="@font/inter18_ptmedium"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:text="Tanami v1.0.0 (Juli 2025)"
-        android:textColor="@color/neutral200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

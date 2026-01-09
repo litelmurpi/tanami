@@ -275,10 +275,6 @@
                 android:fontFamily="@font/inter24_ptsemibold"
                 android:layout_marginBottom="8dp"/>
 
-
-
-
-
             <RelativeLayout
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
@@ -286,6 +282,7 @@
                 tools:context=".MainActivity">
 
                 <TextView
+                    android:id="@+id/btnEmail"
                     android:layout_width="350dp"
                     android:layout_height="68dp"
                     android:layout_centerInParent="true"
@@ -309,10 +306,11 @@
                 tools:context=".MainActivity">
 
                 <TextView
+                    android:id="@+id/btnInstagram"
                     android:layout_width="350dp"
                     android:layout_height="68dp"
                     android:layout_centerInParent="true"
-                    android:text="tanami.in"
+                    android:text="tanami_tech"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:fontFamily="@font/inter18_ptmedium"
@@ -332,10 +330,11 @@
                 tools:context=".MainActivity">
 
                 <TextView
+                    android:id="@+id/btnTwitter"
                     android:layout_width="350dp"
                     android:layout_height="68dp"
                     android:layout_centerInParent="true"
-                    android:text="tanami.in"
+                    android:text="tanami_tech"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:fontFamily="@font/inter18_ptmedium"
@@ -355,10 +354,11 @@
                 tools:context=".MainActivity">
 
                 <TextView
+                    android:id="@+id/btnFacebook"
                     android:layout_width="350dp"
                     android:layout_height="68dp"
                     android:layout_centerInParent="true"
-                    android:text="tanami.in"
+                    android:text="tanami_tech"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:fontFamily="@font/inter18_ptmedium"
