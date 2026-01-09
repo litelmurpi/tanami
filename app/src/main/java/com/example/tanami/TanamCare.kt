@@ -42,7 +42,7 @@ class TanamCare : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private var scannerAnimator: ObjectAnimator? = null
 
-    private val apiKey = "AIzaSyA-j6qjas0-phEdaE1pKXASWJtIWfw1MPo"
+    private val apiKey = "AIzaSyB9OeqWLYCEG9vdTTRjJNYV-46eaz0Et3o"
 
     private val generativeModel = GenerativeModel(
         modelName = "gemini-2.5-flash",
@@ -177,42 +177,50 @@ class TanamCare : AppCompatActivity() {
         val view = layoutInflater.inflate(R.layout.tanamcareresult, null)
         dialog.setContentView(view)
 
-        dialog.window?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            ?.setBackgroundResource(android.R.color.transparent)
-
-        val tvTitle = view.findViewById<android.widget.TextView>(R.id.tvDiseaseTitle)
-        val tvExplanation = view.findViewById<android.widget.TextView>(R.id.tvExplanation)
-        val tvSolution = view.findViewById<android.widget.TextView>(R.id.tvSolution)
-        val tvConfidence = view.findViewById<android.widget.TextView>(R.id.tvConfidence)
-        val progressBar = view.findViewById<android.widget.ProgressBar>(R.id.progressBarConfidence)
+        // Hubungkan secara manual dengan ID yang ada di tanamcareresult.xml
+        val tvTitle = view.findViewById<TextView>(R.id.tvDiseaseTitle)
+        val tvExplanation = view.findViewById<TextView>(R.id.tvExplanation)
+        val tvSolution = view.findViewById<TextView>(R.id.tvSolution)
+        val tvConfidence = view.findViewById<TextView>(R.id.tvConfidence)
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBarConfidence)
 
         var title = "Hasil Analisa"
         var explanation = ""
         var solution = ""
         var score = 85
 
-        try {
-            val cleanText = resultText.replace("**", "").replace("*", "")
-            title = cleanText.substringAfter("Nama Penyakit:").substringBefore("Penjelasan:").trim()
-            explanation = cleanText.substringAfter("Penjelasan:").substringBefore("Skor:").trim()
-            score = cleanText.substringAfter("Skor:").substringBefore("Solusi").trim().filter { it.isDigit() }.toIntOrNull() ?: 85
-            solution = cleanText.substringAfter("Solusi dari Tanamin:").trim()
-        } catch (e: Exception) { explanation = resultText }
+        // Membersihkan format teks dari AI
+        val cleanText = resultText.replace("**", "").replace("*", "")
 
+        if (cleanText.contains("Nama Penyakit:", ignoreCase = true)) {
+            try {
+                title = cleanText.substringAfter("Nama Penyakit:").substringBefore("Penjelasan:").trim()
+                explanation = cleanText.substringAfter("Penjelasan:").substringBefore("Skor:").trim()
+                score = cleanText.substringAfter("Skor:").substringBefore("Solusi").trim().filter { it.isDigit() }.toIntOrNull() ?: 85
+                solution = cleanText.substringAfter("Solusi dari Tanamin:").trim()
+            } catch (e: Exception) {
+                explanation = cleanText
+            }
+        } else {
+            // Logika untuk non-tanaman (Pesan santai Tanamin)
+            title = "Waduh! 🤔"
+            explanation = cleanText
+            solution = "Coba foto tanaman kamu yang lebih jelas ya, biar Tanamin bisa bantu analisa! ✨"
+            score = 0
+        }
+
+        // Mengisi data ke UI
         tvTitle.text = title
         tvExplanation.text = explanation
         tvSolution.text = solution
         tvConfidence.text = "$score%"
         progressBar.progress = score
 
-        if (!title.contains("bingung", true)) {
+        // Simpan ke history hanya jika itu tanaman
+        if (cleanText.contains("Nama Penyakit:", ignoreCase = true)) {
             val historyManager = HistoryManager(this)
-            // MENGIRIM 3 DATA AGAR TERSIMPAN SEMPURNA
             historyManager.saveHistory(title, explanation, solution)
         }
-
-        dialog.window?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            ?.setBackgroundResource(android.R.color.transparent)
 
         dialog.show()
     }

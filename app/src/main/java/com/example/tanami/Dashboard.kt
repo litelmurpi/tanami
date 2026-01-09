@@ -9,16 +9,14 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tanami.network.TanamiDeviceFinder
 import com.example.tanami.utils.TanamiPrefs
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -29,81 +27,82 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
-// Model Data untuk Dropdown
-data class DeviceItem(val name: String, val id: String, val isActive: Boolean)
+data class DeviceItem(
+    val name: String,
+    val id: String,
+    val isActive: Boolean,
+    val moisture: Int = 0,
+    val ph: Double = 0.0,
+    val temperature: Double = 0.0
+)
 
 class Dashboard : AppCompatActivity() {
 
-    // --- VIEWS ---
-    private lateinit var imgAvatar: ImageView
-    private lateinit var cardDeviceSelector: MaterialCardView
+    private lateinit var iconManual: ImageView
+    private lateinit var switchWatering: SwitchCompat
+    private lateinit var tvModeTitle: TextView
+    private lateinit var tvStatusMode: TextView
     private lateinit var textDeviceName: TextView
     private lateinit var textDeviceId: TextView
-    private lateinit var btnAddDevice: ImageView
-    private lateinit var iconArrow: ImageView
+    private lateinit var cardDeviceSelector: MaterialCardView
     private lateinit var cardDropdownContainer: MaterialCardView
     private lateinit var rvDropdownList: RecyclerView
-
-    // --- MONITORING VIEWS ---
     private lateinit var progressKelembaban: CircularProgressIndicator
     private lateinit var textKelembaban: TextView
     private lateinit var progressPH: CircularProgressIndicator
     private lateinit var textPH: TextView
     private lateinit var progressTemp: CircularProgressIndicator
     private lateinit var textTemp: TextView
-    private lateinit var switchWatering: SwitchCompat
     private lateinit var textLastUpdate: TextView
-    private lateinit var btnPanduan: MaterialButton
-    private lateinit var btnTanamCare: MaterialButton
 
-    // --- VARIABEL UTAMA ---
     private lateinit var prefs: TanamiPrefs
+    private lateinit var sessionManager: SessionManager
+    private lateinit var deviceFinder: TanamiDeviceFinder
     private var currentDeviceIp: String? = null
     private var isDropdownOpen = false
+    private var isAutoMode = false
+    private val dummyDevices = mutableListOf<DeviceItem>()
 
-    // --- HANDLER UNTUK DATA REAL-TIME (LOOPING) ---
     private val handler = Handler(Looper.getMainLooper())
     private val fetchRunnable = object : Runnable {
         override fun run() {
-            fetchRealtimeData() // Ambil data dari ESP32
-            handler.postDelayed(this, 2000) // Ulangi setiap 2 detik
+            fetchRealtimeData()
+            handler.postDelayed(this, 2000)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
+        installSplashScreen()
         super.onCreate(savedInstanceState)
-
-        // Force Light Mode agar tampilan konsisten
-        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO)
-
         setContentView(R.layout.dashboard)
 
         prefs = TanamiPrefs(this)
+        sessionManager = SessionManager(this)
+
+        deviceFinder = TanamiDeviceFinder(this) { ip, name ->
+            runOnUiThread {
+                if (currentDeviceIp == null || currentDeviceIp != ip) {
+                    currentDeviceIp = ip
+                    refreshDashboardState()
+                }
+            }
+        }
+
         initViews()
+        initDummyData()
         setupListeners()
-        updateLastUpdate()
-    }
-
-    override fun onResume() {
-        super.onResume()
+        displayUserData()
         refreshDashboardState()
-        if (isDropdownOpen) closeDropdown()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        // PENTING: Matikan pengambilan data saat aplikasi diminimize agar hemat baterai
-        handler.removeCallbacks(fetchRunnable)
     }
 
     private fun initViews() {
-        imgAvatar = findViewById(R.id.imgAvatar)
-        cardDeviceSelector = findViewById(R.id.cardDeviceSelector)
+        iconManual = findViewById(R.id.iconManual)
+        switchWatering = findViewById(R.id.switchWatering)
+        tvModeTitle = findViewById(R.id.tvModeTitle)
+        tvStatusMode = findViewById(R.id.tvStatusMode)
         textDeviceName = findViewById(R.id.textDeviceName)
         textDeviceId = findViewById(R.id.textDeviceId)
-        btnAddDevice = findViewById(R.id.btnAddDevice)
-        iconArrow = findViewById(R.id.iconArrow)
+        cardDeviceSelector = findViewById(R.id.cardDeviceSelector)
         cardDropdownContainer = findViewById(R.id.cardDropdownContainer)
         rvDropdownList = findViewById(R.id.rvDropdownList)
         progressKelembaban = findViewById(R.id.progressKelembaban)
@@ -112,254 +111,181 @@ class Dashboard : AppCompatActivity() {
         textPH = findViewById(R.id.textPH)
         progressTemp = findViewById(R.id.progressTemp)
         textTemp = findViewById(R.id.textTemp)
-        switchWatering = findViewById(R.id.switchWatering)
         textLastUpdate = findViewById(R.id.textLastUpdate)
-        btnPanduan = findViewById(R.id.btnPanduan)
-        btnTanamCare = findViewById(R.id.btnTanamCare)
     }
 
-    private fun refreshDashboardState() {
-        val savedName = prefs.getDeviceName()
-        val savedIp = prefs.getDeviceIp()
-
-        // Hapus antrian lama agar tidak double loop
-        handler.removeCallbacks(fetchRunnable)
-
-        if (savedIp != null) {
-            textDeviceName.text = savedName
-            textDeviceId.text = "IP: $savedIp"
-            currentDeviceIp = savedIp
-            switchWatering.isEnabled = true
-
-            // MULAI LOOPING PENGAMBILAN DATA REAL-TIME
-            handler.post(fetchRunnable)
-
-        } else {
-            textDeviceName.text = "Pilih Kebun"
-            textDeviceId.text = "Belum terhubung"
-            currentDeviceIp = null
-            switchWatering.isEnabled = false
-            switchWatering.isChecked = false
-            updateMonitoringUI(0, 0.0, 0.0)
-        }
+    private fun initDummyData() {
+        dummyDevices.clear()
+        dummyDevices.add(DeviceItem("Kebun Tomat", "DEV-001", true, 75, 9.9, 14.2)) // Sensor pH/Temp 0
+        dummyDevices.add(DeviceItem("Cabai Rawit", "DEV-002", false, 40, 2.9, 58.7))
+        dummyDevices.add(DeviceItem("Tanaman Hias", "DEV-003", false, 90, 5.8, 2.3))
     }
 
-    // --- FUNGSI BARU: AMBIL DATA REAL DARI ESP32 ---
-    private fun fetchRealtimeData() {
-        if (currentDeviceIp == null) return
 
-        Thread {
-            try {
-                // 1. Panggil URL ESP32
-                val url = URL("http://$currentDeviceIp/status")
-                val conn = url.openConnection() as HttpURLConnection
-                conn.requestMethod = "GET"
-                conn.connectTimeout = 1500 // Timeout cepat (1.5 detik)
-
-                if (conn.responseCode == 200) {
-                    val stream = conn.inputStream
-                    // Baca respon string
-                    val response = Scanner(stream).useDelimiter("\\A").next()
-
-                    // 2. Parsing JSON {"moisture": 45, "pump": "OFF", "mode": "AUTO"}
-                    val json = JSONObject(response)
-                    val moisture = json.optInt("moisture", 0)
-                    val temp = json.optDouble("temperature", 0.0)
-
-                    // (Opsional) Ambil status pompa jika ingin sinkronisasi switch
-                    // val pumpStatus = json.optString("pump")
-
-                    // 3. Update UI di Main Thread
-                    runOnUiThread {
-                        // Masukkan data asli ke UI
-                        // Karena hardware ESP32 belum ada sensor PH & Suhu, kita set 0 atau dummy dulu
-                        // Fokus ke Moisture (Sensor Tanah)
-                        updateMonitoringUI(moisture, 0.0, temp)
-                        updateLastUpdate() // Update jam
-                    }
-                }
-                conn.disconnect()
-            } catch (e: Exception) {
-                // Jangan crash kalau gagal konek (misal alat mati), diam saja atau log
-                e.printStackTrace()
-            }
-        }.start()
-    }
-
+    // --- FITUR SIRAM OTOMATIS DAN MANUAL ---
     private fun setupListeners() {
-        btnAddDevice.setOnClickListener { startActivity(Intent(this, TambahPerangkat::class.java)) }
+        findViewById<ImageView>(R.id.btnAddDevice).setOnClickListener { startActivity(Intent(this, TambahPerangkat::class.java)) }
         cardDeviceSelector.setOnClickListener { toggleDropdown() }
-        switchWatering.setOnCheckedChangeListener { _, isChecked ->
-            if (currentDeviceIp == null) {
-                Toast.makeText(this, "Pilih kebun dulu!", Toast.LENGTH_SHORT).show()
-                switchWatering.isChecked = false
-                return@setOnCheckedChangeListener
+
+        iconManual.setOnClickListener {
+            isAutoMode = !isAutoMode
+            if (isAutoMode) {
+                iconManual.setColorFilter(Color.parseColor("#4CAF50"))
+                tvModeTitle.text = "Siram\nOtomatis"
+                tvStatusMode.text = "Mode: Otomatis"
+                switchWatering.alpha = 0.5f
+                Toast.makeText(this, "Mode Otomatis Aktif", Toast.LENGTH_SHORT).show()
+                sendModeCommandToEsp32(false)
+            } else {
+                iconManual.setColorFilter(Color.parseColor("#2D2D2D"))
+                tvModeTitle.text = "Siram\nManual"
+                tvStatusMode.text = "Mode: Manual"
+                switchWatering.alpha = 1.0f
+                Toast.makeText(this, "Mode Manual Aktif", Toast.LENGTH_SHORT).show()
+                sendModeCommandToEsp32(true)
             }
-            if (switchWatering.isPressed) sendCommandToEsp32(isChecked)
         }
 
-        btnPanduan.setOnClickListener { startActivity(Intent(this, ListPanduan::class.java)) }
-
-        // --- MODIFIKASI UTAMA DISINI: LINK KE HALAMAN SCAN AI ---
-        btnTanamCare.setOnClickListener {
-            startActivity(Intent(this, TanamCare::class.java))
+        switchWatering.setOnClickListener {
+            if (isAutoMode) {
+                switchWatering.isChecked = !switchWatering.isChecked
+                Toast.makeText(this, "Matikan mode otomatis dulu", Toast.LENGTH_SHORT).show()
+            } else if (currentDeviceIp != null) {
+                sendCommandToEsp32(switchWatering.isChecked)
+            }
         }
     }
 
-    private fun toggleDropdown() {
-        if (isDropdownOpen) closeDropdown() else openDropdown()
-    }
-
-    private fun openDropdown() {
-        cardDropdownContainer.visibility = View.VISIBLE
-        ObjectAnimator.ofFloat(iconArrow, "rotation", 0f, 180f).apply { duration = 300; start() }
-        setupDropdownList()
-        isDropdownOpen = true
-    }
-
-    private fun closeDropdown() {
-        cardDropdownContainer.visibility = View.GONE
-        ObjectAnimator.ofFloat(iconArrow, "rotation", 180f, 0f).apply { duration = 300; start() }
-        isDropdownOpen = false
-    }
-
+    // --- FITUR EDIT & HAPUS PULIH ---
     private fun setupDropdownList() {
         rvDropdownList.layoutManager = LinearLayoutManager(this)
-
         val historyList = prefs.getDeviceHistory()
         val dropdownItems = mutableListOf<DeviceItem>()
 
-        if (historyList.isNotEmpty()) {
-            historyList.forEach {
-                val isActive = (it.second == prefs.getDeviceIp())
-                dropdownItems.add(DeviceItem(it.first, it.second, isActive))
+        dropdownItems.addAll(dummyDevices)
+        historyList.forEach {
+            if (dummyDevices.none { d -> d.id == it.second }) {
+                dropdownItems.add(DeviceItem(it.first, it.second, it.second == prefs.getDeviceIp()))
             }
-        } else {
-            // Data Dummy jika kosong
-            dropdownItems.add(DeviceItem("Tanami Device 1", "0.0.0.0", false))
         }
 
-        val currentName = prefs.getDeviceName()
-
-        rvDropdownList.adapter = DashboardDropdownAdapter(
-            list = dropdownItems,
-            currentActiveName = currentName,
-            onClick = { selected ->
+        rvDropdownList.adapter = DashboardDropdownAdapter(dropdownItems, prefs.getDeviceName(),
+            { selected -> // OnClick
                 prefs.saveCurrentDevice(selected.name, selected.id)
                 refreshDashboardState()
                 closeDropdown()
-                Toast.makeText(this, "Berpindah ke ${selected.name}", Toast.LENGTH_SHORT).show()
             },
-            onEdit = { itemToEdit ->
-                showRenameDialog(itemToEdit)
-            },
-            onDelete = { itemToDelete ->
-                showDeleteConfirmation(itemToDelete)
-            }
+            { item -> showRenameDialog(item) }, // OnEdit PULIH
+            { item -> showDeleteConfirmation(item) } // OnDelete PULIH
         )
     }
 
     private fun showRenameDialog(item: DeviceItem) {
-        val input = EditText(this)
-        input.setText(item.name)
-        input.setSelection(input.text.length)
-
-        val container = android.widget.FrameLayout(this)
-        val params = android.widget.FrameLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        params.leftMargin = 60
-        params.rightMargin = 60
-        input.layoutParams = params
-        container.addView(input)
-
-        AlertDialog.Builder(this)
-            .setTitle("Ubah Nama")
-            .setMessage("Ganti nama untuk: ${item.name}")
-            .setView(container)
+        if (item.id.startsWith("DEV")) return // Jangan edit dummy
+        val input = EditText(this).apply { setText(item.name) }
+        AlertDialog.Builder(this).setTitle("Ubah Nama").setView(input)
             .setPositiveButton("Simpan") { _, _ ->
-                val newName = input.text.toString().trim()
-                if (newName.isNotEmpty()) {
-                    prefs.renameDevice(item.id, newName)
-                    setupDropdownList()
-                    refreshDashboardState()
-                    Toast.makeText(this, "Nama berhasil diubah!", Toast.LENGTH_SHORT).show()
-                }
-            }
-            .setNegativeButton("Batal", null)
-            .show()
+                prefs.renameDevice(item.id, input.text.toString())
+                setupDropdownList()
+                refreshDashboardState()
+            }.setNegativeButton("Batal", null).show()
     }
 
     private fun showDeleteConfirmation(item: DeviceItem) {
-        AlertDialog.Builder(this)
-            .setTitle("Hapus Perangkat?")
-            .setMessage("Apakah Anda yakin ingin menghapus '${item.name}'? Data tidak bisa dikembalikan.")
+        if (item.id.startsWith("DEV")) return // Jangan hapus dummy
+        AlertDialog.Builder(this).setTitle("Hapus Perangkat")
+            .setMessage("Yakin ingin menghapus ${item.name}?")
             .setPositiveButton("Hapus") { _, _ ->
                 prefs.removeDevice(item.id)
                 setupDropdownList()
                 refreshDashboardState()
-                Toast.makeText(this, "${item.name} dihapus.", Toast.LENGTH_SHORT).show()
-
-                if (prefs.getDeviceHistory().isEmpty()) {
-                    closeDropdown()
-                }
-            }
-            .setNegativeButton("Batal", null)
-            .show()
+            }.setNegativeButton("Batal", null).show()
     }
 
-    private fun sendCommandToEsp32(isOn: Boolean) {
-        val state = if (isOn) "ON" else "OFF"
-        val targetUrl = "http://$currentDeviceIp/control?pompa=$state"
-        Toast.makeText(this, "Mengirim $state...", Toast.LENGTH_SHORT).show()
+    private fun refreshDashboardState() {
+        val savedName = prefs.getDeviceName()
+        val savedIpOrId = prefs.getDeviceIp()
+        handler.removeCallbacks(fetchRunnable)
+
+        val dummyMatch = dummyDevices.find { it.name == savedName }
+        if (dummyMatch != null) {
+            textDeviceName.text = dummyMatch.name
+            textDeviceId.text = "ID: ${dummyMatch.id}"
+            currentDeviceIp = null
+            updateMonitoringUI(dummyMatch.moisture, dummyMatch.ph, dummyMatch.temperature)
+        } else if (savedIpOrId != null && savedIpOrId != "0.0.0.0") {
+            textDeviceName.text = savedName
+            textDeviceId.text = "IP: $savedIpOrId"
+            currentDeviceIp = savedIpOrId
+            handler.post(fetchRunnable)
+        } else {
+            deviceFinder.startDiscovery()
+        }
+    }
+
+    private fun fetchRealtimeData() {
+        if (currentDeviceIp == null) return
         Thread {
             try {
-                val url = URL(targetUrl)
-                val conn = url.openConnection() as HttpURLConnection
-                conn.requestMethod = "GET"
-                conn.connectTimeout = 3000
-                val code = conn.responseCode
-                runOnUiThread {
-                    if (code == 200) {
-                        Toast.makeText(this, "Sukses: Pompa $state ✅", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "Gagal: Error $code ❌", Toast.LENGTH_SHORT).show()
-                        switchWatering.isChecked = !isOn
+                val conn = URL("http://$currentDeviceIp/status").openConnection() as HttpURLConnection
+                if (conn.responseCode == 200) {
+                    val response = conn.inputStream.bufferedReader().use { it.readText() }
+                    val json = JSONObject(response)
+                    runOnUiThread {
+                        // Ambil data dari ESP, jika 0 tampilkan 0
+                        updateMonitoringUI(json.optInt("moisture"), json.optDouble("ph"), json.optDouble("temperature"))
+                        updateLastUpdate()
                     }
                 }
-            } catch (e: Exception) {
-                runOnUiThread {
-                    Toast.makeText(this, "Gagal Konek ke Alat ⚠️", Toast.LENGTH_SHORT).show()
-                    switchWatering.isChecked = !isOn
-                }
-            }
+                conn.disconnect()
+            } catch (e: Exception) { e.printStackTrace() }
         }.start()
     }
 
     private fun updateMonitoringUI(humidity: Int, ph: Double, temperature: Double) {
-        // Update Kelembaban (Data Asli)
         progressKelembaban.progress = humidity
-        textKelembaban.text = "$humidity%"
+        textKelembaban.text = if (humidity > 0) "$humidity%" else "0"
 
-        // Update PH (Data Dummy / 0)
-        val phProgress = ((ph / 14.0) * 100).toInt()
-        progressPH.progress = phProgress
-        textPH.text = String.format("%.1f", ph)
+        progressPH.progress = (ph * 7).toInt()
+        textPH.text = if (ph > 0.0) String.format("%.1f", ph) else "0,0"
 
-        // Update Suhu (Data Dummy / 0)
-        val tempProgress = ((temperature / 50.0) * 100).toInt()
-        progressTemp.progress = tempProgress
-        textTemp.text = String.format("%.1f", temperature)
+        progressTemp.progress = (temperature * 2).toInt()
+        textTemp.text = if (temperature > 0.0) String.format("%.1f°C", temperature) else "0,0"
     }
 
     private fun updateLastUpdate() {
-        val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale("id", "ID"))
-        textLastUpdate.text = "terakhir diperbarui: ${sdf.format(Date())} WIB"
+        textLastUpdate.text = "terakhir diperbarui: ${SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())} WIB"
     }
+
+    private fun displayUserData() {
+        findViewById<TextView>(R.id.tvGreetingTitle).text = "Hai, ${sessionManager.getUserName()}!"
+    }
+
+    private fun sendModeCommandToEsp32(isManual: Boolean) {
+        if (currentDeviceIp == null) return
+        Thread {
+            try {
+                val mode = if (isManual) "1" else "0"
+                URL("http://$currentDeviceIp/mode?manual=$mode").openConnection().getHeaderField(0)
+            } catch (e: Exception) { e.printStackTrace() }
+        }.start()
+    }
+
+    private fun sendCommandToEsp32(isOn: Boolean) {
+        Thread {
+            try {
+                val state = if (isOn) "ON" else "OFF"
+                URL("http://$currentDeviceIp/control?pompa=$state").openConnection().getHeaderField(0)
+            } catch (e: Exception) { e.printStackTrace() }
+        }.start()
+    }
+
+    private fun toggleDropdown() { if (isDropdownOpen) closeDropdown() else openDropdown() }
+    private fun openDropdown() { cardDropdownContainer.visibility = View.VISIBLE; setupDropdownList(); isDropdownOpen = true }
+    private fun closeDropdown() { cardDropdownContainer.visibility = View.GONE; isDropdownOpen = false }
 }
 
-// --- ADAPTER TIDAK PERLU DIUBAH ---
+// ADAPTER DROPDOWN
 class DashboardDropdownAdapter(
     private val list: List<DeviceItem>,
     private val currentActiveName: String?,
@@ -367,48 +293,40 @@ class DashboardDropdownAdapter(
     private val onEdit: (DeviceItem) -> Unit,
     private val onDelete: (DeviceItem) -> Unit
 ) : RecyclerView.Adapter<DashboardDropdownAdapter.Holder>() {
-
     class Holder(v: View) : RecyclerView.ViewHolder(v) {
         val card: MaterialCardView = v.findViewById(R.id.card_root)
         val tvName: TextView = v.findViewById(R.id.tv_device_name)
         val tvId: TextView = v.findViewById(R.id.tv_device_id)
-        val indicator: View = v.findViewById(R.id.indicator_selected)
         val dot: ImageView = v.findViewById(R.id.img_status_dot)
+        val indicator: View = v.findViewById(R.id.indicator_selected)
         val btnEdit: ImageView = v.findViewById(R.id.btn_edit)
         val btnDelete: ImageView = v.findViewById(R.id.btn_delete)
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.itempilihanperangkat, parent, false)
-        return Holder(v)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder =
+        Holder(LayoutInflater.from(parent.context).inflate(R.layout.itempilihanperangkat, parent, false))
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val item = list[position]
         holder.tvName.text = item.name
         holder.tvId.text = item.id
-
-        if (item.isActive) {
-            holder.dot.setColorFilter(Color.parseColor("#4CAF50"))
-        } else {
-            holder.dot.setColorFilter(Color.parseColor("#BDBDBD"))
-        }
+        holder.dot.setColorFilter(if (item.id.startsWith("DEV")) Color.parseColor("#4CAF50") else Color.parseColor("#BDBDBD"))
 
         val isSelected = (item.name == currentActiveName)
-        if (isSelected) {
-            holder.card.setCardBackgroundColor(Color.WHITE)
-            holder.indicator.visibility = View.VISIBLE
-            holder.card.elevation = 8f
+        holder.indicator.visibility = if (isSelected) View.VISIBLE else View.GONE
+        holder.card.setCardBackgroundColor(if (isSelected) Color.WHITE else Color.parseColor("#F5F5F5"))
+
+        // Sembunyikan tombol edit/hapus jika perangkat dummy (DEV-xxx)
+        if (item.id.startsWith("DEV")) {
+            holder.btnEdit.visibility = View.GONE
+            holder.btnDelete.visibility = View.GONE
         } else {
-            holder.card.setCardBackgroundColor(Color.parseColor("#F5F5F5"))
-            holder.indicator.visibility = View.GONE
-            holder.card.elevation = 0f
+            holder.btnEdit.visibility = View.VISIBLE
+            holder.btnDelete.visibility = View.VISIBLE
         }
 
         holder.itemView.setOnClickListener { onClick(item) }
         holder.btnEdit.setOnClickListener { onEdit(item) }
         holder.btnDelete.setOnClickListener { onDelete(item) }
     }
-
     override fun getItemCount() = list.size
 }
